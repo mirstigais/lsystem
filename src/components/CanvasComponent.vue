@@ -11,7 +11,7 @@
 
     // Use onMounted hook instead of mounted
     onMounted(() => {
-      var canvas = document.getElementById('canvas');
+      const canvas = document.getElementById('canvas');
 
       if (canvas.getContext) 
         {
