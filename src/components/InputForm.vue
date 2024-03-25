@@ -9,26 +9,29 @@
             <label for="constantsInput">Constants:</label><br>
             <input type="text" id="constantsInput" name="constantsInput" v-model="formData.constants" @input="validateConstants"><br>
             <span v-if="formErrors.constantsError" class="error">{{ formErrors.constantsError }}</span><br>
-            <label for="axoimInput">Axoim:</label><br>
-            <input type="number" id="axoimInput" name="axoimInput" v-model="formData.axiom"><br>
             <label for="lengthInput">Line length:</label><br>
             <input type="number" id="lengthInput" name="lengthInput" v-model="formData.length"><br>
+            <label for="rulesInput">Rules:</label><br>
+            <input type="text" id="rulesInput" name="rulesInput" v-model="formData.rules"><br>
             <button type="submit" :disabled="isDisabled">Submit</button> 
         </form>
 </template>
 
 <script setup lang="ts">
     import { computed, defineComponent } from 'vue';
-    import FormValidationService from '../services/FormValidationService';
+    import FormValidationService from '@services/FormValidationService';
+    import { useCanvasStore } from '@stores/canvas';
+    import { DrawInput } from '@services/DrawingService';
+    import DrawingServiceUtils from '@utils/DrawingServiceUtils';
 
-    const emit = defineEmits(['form-submitted']);
+    const canvasStore = useCanvasStore()
 
     const formData = {
-        iterations: 0,
-        angle: 0,
-        constants: '',
-        axiom: '',
-        length: 0
+        iterations: 4,
+        angle: 30,
+        constants: 'X',
+        length: 36,
+        rules: 'X=F[-X][+X]'
     };
 
     const formErrors = {
@@ -54,7 +57,19 @@
     };
 
     const handleSubmit = () => {
-        emit('form-submitted', formData);
+        //this should be elsewhere
+        let constants = formData.constants.split(',');
+        let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(formData.rules);
+
+        const submitData = new DrawInput(
+            formData.iterations,
+            formData.angle,
+            constants,
+            rulesObj,
+            formData.length
+        )
+        
+        canvasStore.setInputData(submitData);
     };
 
     defineComponent({

@@ -1,21 +1,54 @@
-export class CanvasModel {
-    private canvas: HTMLCanvasElement;
-    private context: CanvasRenderingContext2D | null;
+// import p5js from 'p5';
+// import {InputInterface, Rules} from '@services/DrawingService';
 
-    constructor(canvas: HTMLCanvasElement) {
-        this.canvas = canvas;
-        this.context = canvas.getContext('2d');
+// export default class CanvasModel implements InputInterface {
+//   iterations: number;
+//   angle: number;
+//   constants: [];
+//   rules: Rules;
+//   length: number;
+//   p5: p5js;
+//   cache: string
 
-        if (!this.context) {
-            throw new Error("2D rendering context not supported");
-        }
-    }
+//   constructor(
+//       input: InputInterface,
+//       p5: p5js
+//       ) {
+//       this.p5 = p5;
+//       this.iterations = input.iterations;
+//       this.angle = input.angle;
+//       this.constants = input.constants;
+//       this.length = input.length;
+//       this.rules = input.rules;
+//       this.cache = '';
+//       // this.testRules['X'] = 'F+[[X]-X]-F[-FX]+X';
+//       // this.testRules['F'] = 'FF';
+//   }
 
-    clearCanvas() {
-        if (this.context) {
-            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        } else {
-            throw new Error("2D rendering context is null");
-        }
-    }
-}
+//   generate() {
+//     let next = "";
+
+//     for (let i = 0; i < this.constants.length; i++) {
+//         let c = this.constants[i];
+
+//         if (c in this.rules) {
+//             next += this.rules[c];
+//         } else {
+//             next += c;
+//         }
+//     }
+
+//     return next;
+//   }
+
+//   draw() {
+//       this.canvas.clearCanvas();
+//   };
+
+//   start() {
+//       for (let i = 0; i < this.iterations; i++) {
+//           this.cache = this.generate();
+//           this.draw();
+//       }
+//   };
+// }
