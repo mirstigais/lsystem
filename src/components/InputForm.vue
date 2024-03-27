@@ -1,30 +1,53 @@
 <template>
-        <form id="inputForm" @submit.prevent="handleSubmit">
-            <label for="iternationsInput">Iterations:</label><br>
-            <input type="number" id="iternationsInput" name="iternationsInput" v-model="formData.iterations" @input="validateIterations"><br>
-            <span v-if="formErrors.iterationsError" class="error">{{ formErrors.iterationsError }}</span><br>
-            <label for="angleInput">Angle:</label><br>
-            <input type="number" id="angleInput" name="angleInput" v-model="formData.angle" @input="validateAngle"><br>
-            <span v-if="formErrors.angleError" class="error">{{ formErrors.angleError }}</span><br>
-            <label for="constantsInput">Constants:</label><br>
-            <input type="text" id="constantsInput" name="constantsInput" v-model="formData.constants" @input="validateConstants"><br>
-            <span v-if="formErrors.constantsError" class="error">{{ formErrors.constantsError }}</span><br>
-            <label for="lengthInput">Line length:</label><br>
-            <input type="number" id="lengthInput" name="lengthInput" v-model="formData.length"><br>
-            <label for="rulesInput">Rules:</label><br>
-            <input type="text" id="rulesInput" name="rulesInput" v-model="formData.rules"><br>
-            <button type="submit" :disabled="isDisabled">Submit</button> 
-        </form>
+        <!-- <form id="inputForm" @submit.prevent="handleSubmit"> -->
+    <el-form :model="form" label-width="auto" style="max-width: 600px">
+        <el-form-item label="Iterations">
+            <el-input-number v-model="iternations" id="iternationsInput" :min="1" :max="10" controls-position="right" @change="handleChange" />
+        </el-form-item>
+        <!-- <input type="number" id="iternationsInput" name="iternationsInput" v-model="formData.iterations" @input="validateIterations"><br> -->
+        <span v-if="formErrors.iterationsError" class="error">{{ formErrors.iterationsError }}</span><br>
+        <el-form-item label="Angle">
+            <el-input-number v-model="angle" id="angleInput" :min="1" :max="10" controls-position="right" @change="handleChange" />
+        </el-form-item>
+        
+        <!-- <input type="number" id="angleInput" name="angleInput" v-model="formData.angle" @input="validateAngle"><br> -->
+        <span v-if="formErrors.angleError" class="error">{{ formErrors.angleError }}</span><br>
+        <label for="constantsInput">Constants:</label><br>
+        <el-input v-model="constants" id="constantsInput" style="width: 240px" placeholder="Constants" @input="validateConstants" />
+        <!-- <input type="text" id="constantsInput" name="constantsInput" v-model="formData.constants" @input="validateConstants"><br> -->
+        <span v-if="formErrors.constantsError" class="error">{{ formErrors.constantsError }}</span><br>
+        <label for="lengthInput">Line length:</label><br>
+        <el-input-number v-model="length" id="lengthInput" :min="1" :max="10" controls-position="right" @change="handleChange" />
+        <!-- <input type="number" id="lengthInput" name="lengthInput" v-model="formData.length"><br> -->
+        <label for="rulesInput">Rules:</label><br>
+        <el-input v-model="rules" id="rulesInput" style="width: 240px" placeholder="Constants" @input="validateConstants" />
+        <!-- <input type="text" id="rulesInput" name="rulesInput" v-model="formData.rules"><br> -->
+        <button type="submit" :disabled="isDisabled">Submit</button> 
+        <!-- </form> -->
+    </el-form>
 </template>
 
 <script setup lang="ts">
-    import { computed, defineComponent } from 'vue';
+    import { computed, defineComponent, ref, reactive } from 'vue';
     import FormValidationService from '@services/FormValidationService';
     import { useCanvasStore } from '@stores/canvas';
     import { DrawInput } from '@services/DrawingService';
     import DrawingServiceUtils from '@utils/DrawingServiceUtils';
 
-    const canvasStore = useCanvasStore()
+    const form = reactive({
+        iterations: 4,
+        angle: 30,
+        constants: 'X',
+        length: 36,
+        rules: 'X=F[-X][+X]'
+    });
+
+    const canvasStore = useCanvasStore();
+    const iternations = ref(1);
+    const angle = ref(1);
+    const constants = ref();
+    const length = ref(1);
+    const rules = ref();
 
     const formData = {
         iterations: 4,
@@ -33,6 +56,10 @@
         length: 36,
         rules: 'X=F[-X][+X]'
     };
+ 
+    const handleChange = (value: number) => {
+        console.log(value)
+    }
 
     const formErrors = {
         iterationsError: '',

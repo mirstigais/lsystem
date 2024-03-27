@@ -1,12 +1,16 @@
 import { createApp } from 'vue';
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css'
 import { createPinia } from 'pinia'
 import './style.css';
 import App from './App.vue';
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 
 const store = createPinia();
+const app = createApp(App);
 
-createApp(App).use(store).mount('#app')
+app.use(store);
+app.use(ElementPlus);
+
+app.mount('#app')
