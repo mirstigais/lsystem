@@ -1,17 +1,16 @@
-<script setup>
-import { ref } from 'vue'
-
-const isHidden = ref(0)
-</script>
-
 <template>
     <div id="content">
-        <button @click='isHidden = !isHidden'>Show table of allowed characters</button>
+        <el-button type="info" @click='isHidden = !isHidden'>Show table of allowed characters</el-button>
         <div v-show='isHidden'>
             <p>The following characters have a geometric interpretation.</p>
             <a href="https://paulbourke.net/fractals/lsys/">Information Source</a>
-            <table>
-                <tr>
+            <el-table
+                :data="tableData"
+                style="width: 100%"
+            >
+            <el-table-column prop="character" label="Character" width="180" />
+            <el-table-column prop="meaning" label="Meaning" width="180" />
+                <!-- <tr>
                     <th>Character</th>
                     <th>Meaning</th>
                 </tr>
@@ -82,17 +81,46 @@ const isHidden = ref(0)
                 <tr>
                     <td>)</td>
                     <td>Increment turning angle by turning angle increment</td>
-                </tr>
-            </table>
+                </tr> -->
+            </el-table>
         </div>
     </div>
 </template>
 
-<style scoped>
-/* #content {
-    float: left;
-    background-color: red;
-    display: block;
-} */
+<script setup lang="ts">
+import { ref } from 'vue'
 
-</style>
+const isHidden = ref(0)
+
+interface Record {
+  character: string
+  description: string
+}
+
+const tableData: Record[] = [
+  {
+    character: 'F',
+    description: 'Move forward by line length drawing a line',
+  },
+  {
+    character: '+',
+    description: 'Turn left by turning angle',
+  },
+  {
+    character: '-',
+    description: 'Turn right by turning angle',
+  },
+  {
+    character: '|',
+    description: 'Reverse direction (ie: turn by 180 degrees)',
+  },
+  {
+    character: '[',
+    description: 'Push current drawing state onto stack',
+  },
+  {
+    character: ']',
+    description: 'Pop current drawing state from the stack',
+  },
+]
+</script>
