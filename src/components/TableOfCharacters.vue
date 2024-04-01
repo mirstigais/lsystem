@@ -9,7 +9,7 @@
                 style="width: 100%"
             >
             <el-table-column prop="character" label="Character" width="180" />
-            <el-table-column prop="meaning" label="Meaning" width="180" />
+            <el-table-column prop="description" label="Description" width="180" />
                 <!-- <tr>
                     <th>Character</th>
                     <th>Meaning</th>
@@ -90,7 +90,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const isHidden = ref(0)
+const isHidden = ref(true);
 
 interface Record {
   character: string

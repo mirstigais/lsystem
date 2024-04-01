@@ -3,22 +3,28 @@ import p5js from 'p5';
 export class DrawInput {
     iterations: number;
     angle: number;
-    constants: string[];
+    start: string;
     rules: RulesAssociativeArr;
     length: number;
+    drawColor: string;
+    backgroundColor: string;
 
     constructor(
         iterations: number,
         angle: number,
-        constants: string[],
+        start: string,
         rules: RulesAssociativeArr,
-        length: number
+        length: number,
+        drawColor: string,
+        backgroundColor: string,
         ) {
         this.iterations = iterations;
         this.angle = angle;
-        this.constants = constants;
+        this.start = start;
         this.length = length;
         this.rules = rules;
+        this.drawColor = drawColor;
+        this.backgroundColor = backgroundColor;
         //Why do I have to toString() for it to work?
         // rules = rules.toString().toUpperCase();
         // this.validate(rulesString);
@@ -69,25 +75,24 @@ export class DrawingService {
     }
 
     start() {
-        this.p5js.background(220);
         this.p5js.noLoop();
-
+        this.cache = this.inputData.start;
         for (let i = 0; i < this.inputData.iterations; i++) {
             this.cache = this.generate();
             this.draw();
         }
     }
-
+    //needs a rewrite, I am a retard.
     generate() {
-        let next = "";
+        let next = '';
 
-        for (let i = 0; i < this.inputData.constants.length; i++) {
-            let constant = this.inputData.constants[i];
-
-            if (this.inputData.rules.hasOwnProperty(constant)) {
-                next += this.inputData.rules[constant];
+        for (let i = 0; i < this.cache.length; i++) {
+            let char = this.cache[i];
+            
+            if (char in this.inputData.rules) {
+                next += this.inputData.rules[char];
             } else {
-                next += constant;
+                next += char;
             }
         }
 
@@ -95,15 +100,17 @@ export class DrawingService {
     }
 
     draw() {
+        this.p5js.background(this.inputData.backgroundColor);
+        this.p5js.stroke(this.inputData.drawColor);
         this.p5js.push();
-        this.p5js.translate(this.p5js.width/4, this.p5js.height);
-        this.p5js.rotate(this.p5js.PI/180 * this.inputData.angle);
+        this.p5js.translate(this.p5js.width / 2, this.p5js.height);
+        // this.p5js.rotate(this.p5js.PI/180 * this.inputData.angle);
         
         for(let i = 0; i < this.cache.length; i ++) {
-          let character = this.cache[i];
+          let char = this.cache[i];
           
-          if(character in this.drawRules) {
-            this.drawRules[character]();
+          if(char in this.drawRules) {
+            this.drawRules[char]();
           }  
         }
 
@@ -113,7 +120,7 @@ export class DrawingService {
     setUpDrawRules(): DrawRules{
         return {
             "F": () => {
-              this.p5js.stroke(100, 50, 0);
+              // this.p5js.stroke(this.inputData.drawColor);
               this.p5js.line(0, 0, 0, -this.inputData.length);
               this.p5js.translate(0, -this.inputData.length);
             },
@@ -125,9 +132,6 @@ export class DrawingService {
             },
             "[": () => this.p5js.push(),
             "]": () => {
-                // this.p5js.noStroke();
-                // this.p5js.fill(0, 200, 0);
-                // this.p5js.ellipse(0, 0, 2 * this.inputData.length, 5 * this.inputData.length);
                 this.p5js.pop();
             },
           }

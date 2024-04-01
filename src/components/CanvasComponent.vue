@@ -1,5 +1,14 @@
 <template>
-    <div ref="canvasContainer" style="border:1px solid #000000;"></div>
+    <div class="grid-container">
+        <div ref="canvasContainer" class="canvas" style="border:1px solid #000000;"></div>
+        <!-- <div class="canvas-controls">
+            <span>Drawing color</span>
+            <el-color-picker v-model="drawColor" />
+            <span>background color</span>
+            <el-color-picker v-model="backgroundColor" />
+            <el-button plain>Download</el-button>
+        </div> -->
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -11,21 +20,24 @@
 
     var p5jsCanvas: p5;
     var drawService: DrawingService;
-    const canvasStore = useCanvasStore()
+    const canvasStore = useCanvasStore();
+    const canvasContainer = ref(null);
+    const sizeX: number = 400;
+    const sizeY: number = 400;
     const { 
         length,
         angle,
         rules,
-        constants,
-        iterations
+        start,
+        iterations,
+        drawColor,
+        backgroundColor,
     } = storeToRefs(canvasStore);
 
-    const canvasContainer = ref(null);
-    const sizeX: number = 400;
-    const sizeY: number = 400;
-
-
     onMounted(() => {
+        // drawColor.value = '#000000';
+        // backgroundColor.value = '#5e5d5d';
+
         // Create p5.js sketch
         p5jsCanvas = new p5((p) => {
             p.setup = () => {
@@ -34,7 +46,7 @@
         });
 
         let rulesArr : RulesAssociativeArr = {};
-        let inputData = new DrawInput(0, 0, [], rulesArr, 0);
+        let inputData = new DrawInput(0, 0, '', rulesArr, 0, backgroundColor.value, drawColor.value);
         drawService = new DrawingService(inputData, p5jsCanvas);
     });
 
@@ -45,9 +57,11 @@
         let inputData = new DrawInput(
             iterations.value,
             angle.value,
-            constants.value,
+            start.value,
             rules.value,
-            length.value
+            length.value,
+            drawColor.value,
+            backgroundColor.value
         );
 
         drawService.inputData = inputData;
@@ -60,5 +74,22 @@
     /* width: 100px;
     height: 100px; */
     border:1px solid #000000;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-rows: auto auto; /* Two rows with automatic sizing */
+    grid-template-columns: 1fr; /* One column that takes up the full width */
+    gap: 10px; /* Gap between grid items */
+}
+
+.canvas-controls > * {
+    padding-right: 10px;
+    padding-left: 10px; 
+}
+
+.canvas {
+    width: 400px;
+    height: 400px;
 }
 </style>

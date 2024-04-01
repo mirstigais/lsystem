@@ -7,8 +7,10 @@ export const useCanvasStore = defineStore("canvasStore", {
         length: 0,
         angle: 0,
         rules: {} as RulesAssociativeArr,
-        constants: [] as string [],
-        iterations: 0
+        start: '' as string,
+        iterations: 0,
+        drawColor: '#000000',
+        backgroundColor: '#5E5D5D',
     }),
     
     actions: {
@@ -16,8 +18,16 @@ export const useCanvasStore = defineStore("canvasStore", {
             this.length = input.length;
             this.angle = input.angle;
             this.rules = input.rules;
-            this.constants = input.constants;
+            this.start = input.start;
             this.iterations = input.iterations;
+            this.backgroundColor = input.backgroundColor;
+            this.drawColor = input.drawColor;
+        },
+        setDrawColor(drawColor: string) {
+          this.drawColor = drawColor;
+        },
+        setBackgroundColor(backgroundColor: string) {
+          this.backgroundColor = backgroundColor;
         }
     }
 });
