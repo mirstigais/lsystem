@@ -28,6 +28,9 @@ export const useCanvasStore = defineStore("canvasStore", {
         },
         setBackgroundColor(backgroundColor: string) {
           this.backgroundColor = backgroundColor;
-        }
+        },
+        saveImage() {
+          return null;
+        },
     }
 });

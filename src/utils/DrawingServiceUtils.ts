@@ -13,7 +13,7 @@ const validateAllowedCharacters = (inputString: string) : boolean => {
 }
 
 const convertRulesToAssociativeArr = (rulesString: string) : RulesAssociativeArr => {
-    let lines = rulesString.split(' ');
+    let lines = rulesString.split('\n');
     let rulesArr : RulesAssociativeArr = {};
 
     lines.forEach(function (line : string) {

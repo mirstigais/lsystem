@@ -1,7 +1,7 @@
 <template>
     <div id="content">
-        <el-button type="info" @click='isHidden = !isHidden'>Show table of allowed characters</el-button>
-        <div v-show='isHidden'>
+        <el-button type="info" @click='isShown = !isShown'>Show table of allowed characters</el-button>
+        <div v-show='isShown'>
             <p>The following characters have a geometric interpretation.</p>
             <a href="https://paulbourke.net/fractals/lsys/">Information Source</a>
             <el-table
@@ -90,7 +90,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const isHidden = ref(true);
+const isShown = ref(false);
 
 interface Record {
   character: string

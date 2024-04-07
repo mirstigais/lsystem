@@ -67,6 +67,13 @@
         drawService.inputData = inputData;
         drawService.start();
     });
+
+    canvasStore.$onAction(
+      ({ name } ) => {
+        if (name === 'saveImage') {
+          p5jsCanvas.saveCanvas();
+        }
+    });
 </script>
 
 <style scoped>

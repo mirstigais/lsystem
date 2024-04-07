@@ -1,46 +1,51 @@
 <template>
-    <el-form
-        ref="inputFormRef"
-        :model="form"
-        label-width="auto" 
-        style="max-width: 600px"
-        :rules="formRules"
-        status-icon
-    >
-        <el-form-item label="Iterations" required>
-            <el-input-number v-model="form.iterations" id="iternationsInput" :min="1" :max="10" controls-position="right" @change="handleChange" />
-        </el-form-item>
-        <el-form-item label="Angle" required>
-            <el-input-number v-model="form.angle" id="angleInput" :min="0" controls-position="right" @change="handleChange" />
-        </el-form-item>
-        <el-form-item label="Line length" required>
-            <el-input-number v-model="form.length" id="lengthInput" :min="1" controls-position="right" @change="handleChange" />
-        </el-form-item>
-        <el-form-item label="Start" required>
-            <el-input v-model="form.start" id="startInput" style="width: 240px" placeholder="Start" />
-        </el-form-item>
-        <el-form-item label="Rules" required>
-            <el-input v-model="form.drawRules" id="rulesInput" style="width: 240px" placeholder="Rules" type="textarea" />
-        </el-form-item>
-            <el-form-item label="Line color">
-                <el-color-picker v-model="form.drawColor" @change="handleDrawColorChange" />
-            </el-form-item>
-            <el-form-item label="Background color">
-                <el-color-picker v-model="form.backgroundColor" @change="handleBackgroundColorChange" />
-            </el-form-item>
+  <el-form
+    ref="inputFormRef"
+    :model="form"
+    label-width="auto" 
+    style="max-width: 600px"
+    :rules="formRules"
+    status-icon
+  >
+    <el-form-item label="Iterations" required>
+        <el-input-number v-model="form.iterations" id="iternationsInput" :min="1" :max="10" controls-position="right" @change="handleChange" />
+    </el-form-item>
+    <el-form-item label="Angle" required>
+        <el-input-number v-model="form.angle" id="angleInput" :min="0" controls-position="right" @change="handleChange" />
+    </el-form-item>
+    <el-form-item label="Line length" required>
+        <el-input-number v-model="form.length" id="lengthInput" :min="1" controls-position="right" @change="handleChange" />
+    </el-form-item>
+    <el-form-item label="Start" required>
+        <el-input v-model="form.start" id="startInput" style="width: 240px" placeholder="Start" />
+    </el-form-item>
+    <el-form-item label="Rules" required>
+        <el-input v-model="form.drawRules" id="rulesInput" style="width: 240px" placeholder="Rules" type="textarea" />
+    </el-form-item>
+    <el-form-item label="Line color">
+        <el-color-picker v-model="form.drawColor" @change="handleDrawColorChange" />
+    </el-form-item>
+    <el-form-item label="Background color">
+        <el-color-picker v-model="form.backgroundColor" @change="handleBackgroundColorChange" />
+    </el-form-item>
+    <el-form-item>
+      <el-col :span="5">
         <el-form-item>
-            <el-col :span="5">
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm(inputFormRef)">Draw</el-button>
-                </el-form-item>
-            </el-col>
-            <el-col :span="5">
-                <el-form-item>
-                    <el-button @click="resetForm(inputFormRef)">Reset</el-button>
-                </el-form-item>
-            </el-col>
+          <el-button type="primary" @click="submitForm(inputFormRef)">Draw</el-button>
         </el-form-item>
-    </el-form>
+      </el-col>
+      <el-col :span="5">
+        <el-form-item>
+          <el-button @click="resetForm(inputFormRef)">Reset</el-button>
+        </el-form-item>
+      </el-col>
+      <el-col :span="5">
+        <el-form-item>
+          <el-button @click="canvasStore.saveImage">Save Image</el-button>
+        </el-form-item>
+      </el-col>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script setup lang="ts">
@@ -48,7 +53,7 @@
     import { useCanvasStore } from '@stores/canvas';
     import { DrawInput } from '@services/DrawingService';
     import DrawingServiceUtils from '@utils/DrawingServiceUtils';
-    import type { FormInstance, FormRules } from 'element-plus'
+    import { FormInstance, FormRules } from 'element-plus'
 
     interface InputForm {
         iterations: number

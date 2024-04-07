@@ -82,6 +82,7 @@ export class DrawingService {
             this.draw();
         }
     }
+
     //needs a rewrite, I am a retard.
     generate() {
         let next = '';
@@ -103,7 +104,7 @@ export class DrawingService {
         this.p5js.background(this.inputData.backgroundColor);
         this.p5js.stroke(this.inputData.drawColor);
         this.p5js.push();
-        this.p5js.translate(this.p5js.width / 2, this.p5js.height);
+        this.p5js.translate(this.p5js.width / 2, this.p5js.height / 2);
         // this.p5js.rotate(this.p5js.PI/180 * this.inputData.angle);
         
         for(let i = 0; i < this.cache.length; i ++) {
