@@ -27,7 +27,9 @@
       "@services/*": ["services/*"],
       "@models/*": ["models/*"],
       "@utils/*": ["utils/*"],
-      "@stores/*": ["stores/*"]
+      "@stores/*": ["stores/*"],
+      "@plugins/*": ["plugins/*"],
+      "@views/*": ["views/*"]
     },
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
