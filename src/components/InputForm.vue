@@ -8,7 +8,7 @@
     status-icon
   >
     <el-form-item label="Iterations" required>
-        <el-input-number v-model="form.iterations" id="iternationsInput" :min="1" :max="10" controls-position="right" @change="handleChange" />
+        <el-input-number v-model="form.iterations" id="iternationsInput" :min="1" controls-position="right" @change="handleChange" />
     </el-form-item>
     <el-form-item label="Angle" required>
         <el-input-number v-model="form.angle" id="angleInput" :min="0" controls-position="right" @change="handleChange" />

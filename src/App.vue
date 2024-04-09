@@ -23,15 +23,15 @@ const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
   switch(key) {
     case '1': {
-      router.push({path: '/visualizer'});
+      router.push({path: '/lsystem/visualizer'});
       break;
     }
     case '2': {
-      router.push({path: '/about'});
+      router.push({path: '/lsystem/about'});
       break;
     } 
     case '3': {
-      router.push({path: '/credits'});
+      router.push({path: '/lsystem/credits'});
       break;
     }
   }
