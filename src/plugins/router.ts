@@ -4,15 +4,15 @@ export default createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/visualizer',
+      path: '/lsystem/visualizer',
       component: () => import('@views/Visualizer.vue'),
     },
     {
-      path: '/about',
+      path: '/lsystem/about',
       component: () => import('@views/About.vue'),
     },
     {
-      path: '/credits',
+      path: '/lsystem/credits',
       component: () => import('@views/Credits.vue'),
     },
   ],
