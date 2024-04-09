@@ -5,7 +5,7 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  base: '/lsystem/',
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -13,7 +13,9 @@ export default defineConfig({
       '@services': path.resolve(__dirname, './src/services'),
       '@models': path.resolve(__dirname, './src/models'),
       '@utils': path.resolve(__dirname, './src/utils'),
-      '@stores': path.resolve(__dirname, './src/stores')
+      '@stores': path.resolve(__dirname, './src/stores'),
+      '@plugins': path.resolve(__dirname, './src/plugins'),
+      '@views': path.resolve(__dirname, './src/views')
     },
   },
 })
