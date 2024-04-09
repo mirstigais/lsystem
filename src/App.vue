@@ -13,11 +13,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter, RouterView } from 'vue-router'
 
 const activeIndex = ref('1');
 const router = useRouter();
+
+onMounted(() => {
+  router.push({path: '/lsystem/visualizer'});
+})
 
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
