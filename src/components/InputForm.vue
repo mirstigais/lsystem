@@ -189,16 +189,16 @@
     const handleSubmit = () => {
         if(!form.drawWithAI) {
             //this should be elsewhere
-            let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
-            const submitData = new DrawInput(
-                form.iterations,
-                form.angle,
-                form.start,
-                rulesObj,
-                form.length,
-                form.drawColor,
-                form.backgroundColor,
-            );
+            // let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
+            // const submitData = new DrawInput(
+            //     form.iterations,
+            //     form.angle,
+            //     form.start,
+            //     rulesObj,
+            //     form.length,
+            //     form.drawColor,
+            //     form.backgroundColor,
+            // );
         } else {
 
         }

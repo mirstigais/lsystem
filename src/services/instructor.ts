@@ -18,23 +18,23 @@ const UserSchema = z.object({
   name: z.string()
 })
 
-const formInputSchema = z.object({
-  // Description will be used in the prompt
-  iterations: z.number().describe("iterations"), 
-  name: z.number().describe('angle'),
-  axiom: z.string().describe('axiom, example: X'),
-  rules: z.string().describe('rules, example: X=F[-X][+X]'),
-  length: z.string().describe('length, example: 5'),
-});
+// const formInputSchema = z.object({
+//   // Description will be used in the prompt
+//   iterations: z.number().describe("iterations"), 
+//   name: z.number().describe('angle'),
+//   axiom: z.string().describe('axiom, example: X'),
+//   rules: z.string().describe('rules, example: X=F[-X][+X]'),
+//   length: z.string().describe('length, example: 5'),
+// });
 
-const responseForInput = await client.chat.completions.create({
-  messages: [{ role: "user", content: "Jason Liu is 30 years old" }],
-  model: "gpt-3.5-turbo",
-  response_model: { 
-    schema: formInputSchema, 
-    name: "User"
-  }
-});
+// const responseForInput = await client.chat.completions.create({
+//   messages: [{ role: "user", content: "Jason Liu is 30 years old" }],
+//   model: "gpt-3.5-turbo",
+//   response_model: { 
+//     schema: formInputSchema, 
+//     name: "User"
+//   }
+// });
 
 
 // User will be of type z.infer<typeof UserSchema>
