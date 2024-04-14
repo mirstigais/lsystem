@@ -29,7 +29,8 @@
       "@utils/*": ["utils/*"],
       "@stores/*": ["stores/*"],
       "@plugins/*": ["plugins/*"],
-      "@views/*": ["views/*"]
+      "@views/*": ["views/*"],
+      "@locales/*": ["locales/*"]
     },
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

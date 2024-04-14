@@ -7,19 +7,28 @@
     :rules="formRules"
     status-icon
   >
-    <el-form-item label="Iterations" required>
+    <el-form-item v-if="form.drawWithAI" label="OpenAI API key" required>
+        <el-input v-model="form.apiKey" id="apiKey" style="width: 240px" type="text" />
+    </el-form-item>
+    <el-form-item v-if="form.drawWithAI" label="OpenAI organisation ID" required>
+        <el-input-number v-model="form.orgId" id="orgId" style="width: 240px" :controls=false />
+    </el-form-item>
+    <el-form-item v-if="form.drawWithAI" label="Prompt" required>
+        <el-input v-model="form.prompt" id="prompt" style="width: 240px" type="textarea" />
+    </el-form-item>
+    <el-form-item v-if="!form.drawWithAI" label="Iterations" required>
         <el-input-number v-model="form.iterations" id="iternationsInput" :min="1" controls-position="right" @change="handleChange" />
     </el-form-item>
-    <el-form-item label="Angle" required>
+    <el-form-item v-if="!form.drawWithAI" label="Angle" required>
         <el-input-number v-model="form.angle" id="angleInput" :min="0" controls-position="right" @change="handleChange" />
     </el-form-item>
-    <el-form-item label="Line length" required>
+    <el-form-item v-if="!form.drawWithAI" label="Line length" required>
         <el-input-number v-model="form.length" id="lengthInput" :min="1" controls-position="right" @change="handleChange" />
     </el-form-item>
-    <el-form-item label="Start" required>
+    <el-form-item v-if="!form.drawWithAI" label="Start" required>
         <el-input v-model="form.start" id="startInput" style="width: 240px" placeholder="Start" />
     </el-form-item>
-    <el-form-item label="Rules" required>
+    <el-form-item v-if="!form.drawWithAI" label="Rules" required>
         <el-input v-model="form.drawRules" id="rulesInput" style="width: 240px" placeholder="Rules" type="textarea" />
     </el-form-item>
     <el-form-item label="Line color">
@@ -27,6 +36,9 @@
     </el-form-item>
     <el-form-item label="Background color">
         <el-color-picker v-model="form.backgroundColor" @change="handleBackgroundColorChange" />
+    </el-form-item>
+    <el-form-item>
+        <el-checkbox v-model="form.drawWithAI" label="Draw with AI" size="large" />
     </el-form-item>
     <el-form-item>
       <el-col :span="5">
@@ -63,6 +75,10 @@
         drawRules: string
         drawColor: string
         backgroundColor: string
+        drawWithAI: boolean,
+        apiKey: string | null,
+        orgId: number | null,
+        prompt: string,
     }
 
     const inputFormRef = ref<FormInstance>();
@@ -75,6 +91,10 @@
         drawRules: '',
         drawColor: '',
         backgroundColor: '',
+        drawWithAI: false,
+        apiKey: null,
+        orgId: null,
+        prompt: '',
     });
 
     const formRules = reactive<FormRules<InputForm>>({
@@ -132,7 +152,7 @@
         form.length = 36;
         form.drawRules = 'X=F[-X][+X]';
         form.drawColor = '#000000';
-        form.backgroundColor = '#5e5d5d';
+        form.backgroundColor = '#FFFFFF';
     });
 
     const canvasStore = useCanvasStore();
@@ -167,9 +187,22 @@
     }
 
     const handleSubmit = () => {
-        //this should be elsewhere
-        let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
+        if(!form.drawWithAI) {
+            //this should be elsewhere
+            let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
+            const submitData = new DrawInput(
+                form.iterations,
+                form.angle,
+                form.start,
+                rulesObj,
+                form.length,
+                form.drawColor,
+                form.backgroundColor,
+            );
+        } else {
 
+        }
+        let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
         const submitData = new DrawInput(
             form.iterations,
             form.angle,
