@@ -25,32 +25,7 @@ export class DrawInput {
         this.rules = rules;
         this.drawColor = drawColor;
         this.backgroundColor = backgroundColor;
-        //Why do I have to toString() for it to work?
-        // rules = rules.toString().toUpperCase();
-        // this.validate(rulesString);
-        // this.rules = this.convertRulesToAssociativeArr(rulesString);
     }
-
-    // validate(rules: string) {
-    //     let passed = DrawingUtils.validateAllowedCharacters(rules);
-    //     if (!passed) throw new Error('Rule validation failed');
-    // }
-
-    // convertRulesToAssociativeArr(rulesString : string) {
-    //     let lines = rulesString.split(' ');
-    //     let rulesArr : RulesAssociativeArr = {};
-
-    //     lines.forEach(function (line : string) {
-    //         let split = line.split('=');
-    //         let key = split[0];
-    //         let value = split[1];
-    //         rulesArr[key] = value;
-    //     });
-
-    //     console.log('Rules arr ' +rulesArr);
-
-    //     return rulesArr;
-    // }
 }
 
 export interface RulesAssociativeArr {

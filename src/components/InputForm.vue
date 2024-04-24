@@ -8,10 +8,7 @@
     status-icon
   >
     <el-form-item v-if="form.drawWithAI" label="OpenAI API key" required>
-        <el-input v-model="form.apiKey" id="apiKey" style="width: 240px" type="text" />
-    </el-form-item>
-    <el-form-item v-if="form.drawWithAI" label="OpenAI organisation ID" required>
-        <el-input-number v-model="form.orgId" id="orgId" style="width: 240px" :controls=false />
+        <el-input v-model="form.apiKey" id="apiKey" style="width: 240px" type="password" />
     </el-form-item>
     <el-form-item v-if="form.drawWithAI" label="Prompt" required>
         <el-input v-model="form.prompt" id="prompt" style="width: 240px" type="textarea" />
@@ -65,7 +62,8 @@
     import { useCanvasStore } from '@stores/canvas';
     import { DrawInput } from '@services/DrawingService';
     import DrawingServiceUtils from '@utils/DrawingServiceUtils';
-    import { FormInstance, FormRules } from 'element-plus'
+    import { FormInstance, FormRules } from 'element-plus';
+    import { Prompter } from '@models/Prompter';
 
     interface InputForm {
         iterations: number
@@ -76,8 +74,7 @@
         drawColor: string
         backgroundColor: string
         drawWithAI: boolean,
-        apiKey: string | null,
-        orgId: number | null,
+        apiKey: string,
         prompt: string,
     }
 
@@ -92,8 +89,7 @@
         drawColor: '',
         backgroundColor: '',
         drawWithAI: false,
-        apiKey: null,
-        orgId: null,
+        apiKey: '',
         prompt: '',
     });
 
@@ -188,32 +184,22 @@
 
     const handleSubmit = () => {
         if(!form.drawWithAI) {
-            //this should be elsewhere
-            // let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
-            // const submitData = new DrawInput(
-            //     form.iterations,
-            //     form.angle,
-            //     form.start,
-            //     rulesObj,
-            //     form.length,
-            //     form.drawColor,
-            //     form.backgroundColor,
-            // );
-        } else {
-
-        }
-        let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
-        const submitData = new DrawInput(
-            form.iterations,
-            form.angle,
-            form.start,
-            rulesObj,
-            form.length,
-            form.drawColor,
-            form.backgroundColor,
-        )
+            let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
+            const submitData = new DrawInput(
+                form.iterations,
+                form.angle,
+                form.start,
+                rulesObj,
+                form.length,
+                form.drawColor,
+                form.backgroundColor,
+            )
         
-        canvasStore.setInputData(submitData);
+            canvasStore.setInputData(submitData);
+        } else {
+            let prompter = new Prompter(form.apiKey, form.prompt);
+            prompter.askAI();
+        }
     };
 
     // watch(form, (newValue) => {
