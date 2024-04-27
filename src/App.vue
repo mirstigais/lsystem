@@ -1,28 +1,35 @@
 <template>
-  <el-menu
-    :default-active="activeIndex"
-    class="el-menu-demo"
-    mode="horizontal"
-    @select="handleSelect"
-  >
-    <el-menu-item index="1">{{ $t('menuVisualizer') }}</el-menu-item>
-    <el-menu-item index="2">{{ $t('menuAbout') }}</el-menu-item>
-    <el-menu-item index="3">{{ $t('menuCredits') }}</el-menu-item>
-    <el-select
-      v-model="lang"
-      placeholder="Lang"
-      style="width: 100px"
-      @change="handleLanguageChange"
+  <div class="menu-wrapper">
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-lsystem"
+      mode="horizontal"
+      @select="handleSelect"
     >
-      <el-option
-        v-for="item in langList"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
-  </el-menu>
-  <router-view/>
+      <el-menu-item index="1">{{ $t('menuVisualizer') }}</el-menu-item>
+      <el-menu-item index="2">{{ $t('menuAbout') }}</el-menu-item>
+      <el-menu-item index="3">{{ $t('menuCredits') }}</el-menu-item>
+    </el-menu>
+    <div class="lang-wrapper">
+      <span class="lang-label">Language:</span>
+      <el-select
+        v-model="lang"
+        placeholder="Lang"
+        style="width: 100px"
+        @change="handleLanguageChange"
+      >
+        <el-option
+          v-for="item in langList"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <router-view/>
+  </div>
 </template>
 
 <script setup lang="ts">

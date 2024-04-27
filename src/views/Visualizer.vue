@@ -1,6 +1,6 @@
 <template>
     <h1>L-System visualizer</h1>
-    <div id="mainContent">
+    <div class="main-content">
         <InputForm />
         <CanvasComponent/>
     </div>
@@ -11,11 +11,4 @@
   import TableOfCharacters from '../components/TableOfCharacters.vue'
   import CanvasComponent from '../components/CanvasComponent.vue'
   import InputForm from '../components/InputForm.vue'
-
 </script>
-<style scoped>
-  #mainContent {
-      display: flex;
-      width: 100%
-  }
-</style>

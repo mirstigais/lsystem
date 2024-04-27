@@ -3,15 +3,18 @@
     ref="inputFormRef"
     :model="form"
     label-width="auto" 
-    style="max-width: 600px"
+    label-position="top"
     :rules="formRules"
     status-icon
   >
+    <el-form-item>
+        <el-checkbox v-model="form.drawWithAI" label="Draw with AI" size="large" />
+    </el-form-item>
     <el-form-item v-if="form.drawWithAI" label="OpenAI API key" required>
-        <el-input v-model="form.apiKey" id="apiKey" style="width: 240px" type="password" />
+        <el-input v-model="form.apiKey" id="apiKey" type="password" />
     </el-form-item>
     <el-form-item v-if="form.drawWithAI" label="Prompt" required>
-        <el-input v-model="form.prompt" id="prompt" style="width: 240px" type="textarea" />
+        <el-input v-model="form.prompt" id="prompt" type="textarea" />
     </el-form-item>
     <el-form-item v-if="!form.drawWithAI" label="Iterations" required>
         <el-input-number v-model="form.iterations" id="iternationsInput" :min="1" controls-position="right" @change="handleChange" />
@@ -23,10 +26,10 @@
         <el-input-number v-model="form.length" id="lengthInput" :min="1" controls-position="right" @change="handleChange" />
     </el-form-item>
     <el-form-item v-if="!form.drawWithAI" label="Start" required>
-        <el-input v-model="form.start" id="startInput" style="width: 240px" placeholder="Start" />
+        <el-input v-model="form.start" id="startInput" placeholder="Start" />
     </el-form-item>
     <el-form-item v-if="!form.drawWithAI" label="Rules" required>
-        <el-input v-model="form.drawRules" id="rulesInput" style="width: 240px" placeholder="Rules" type="textarea" />
+        <el-input v-model="form.drawRules" id="rulesInput" placeholder="Rules" type="textarea" />
     </el-form-item>
     <el-form-item label="Line color">
         <el-color-picker v-model="form.drawColor" @change="handleDrawColorChange" />
@@ -34,25 +37,16 @@
     <el-form-item label="Background color">
         <el-color-picker v-model="form.backgroundColor" @change="handleBackgroundColorChange" />
     </el-form-item>
-    <el-form-item>
-        <el-checkbox v-model="form.drawWithAI" label="Draw with AI" size="large" />
-    </el-form-item>
-    <el-form-item>
-      <el-col :span="5">
+    <el-form-item class="button-wrapper">
         <el-form-item>
           <el-button type="primary" @click="submitForm(inputFormRef)">Draw</el-button>
         </el-form-item>
-      </el-col>
-      <el-col :span="5">
         <el-form-item>
           <el-button @click="resetForm(inputFormRef)">Reset</el-button>
         </el-form-item>
-      </el-col>
-      <el-col :span="5">
         <el-form-item>
           <el-button @click="canvasStore.saveImage">Save Image</el-button>
         </el-form-item>
-      </el-col>
     </el-form-item>
   </el-form>
 </template>
