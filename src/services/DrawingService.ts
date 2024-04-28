@@ -95,6 +95,11 @@ export class DrawingService {
 
     setUpDrawRules(): DrawRules{
         return {
+          "G": () => {
+            // this.p5js.stroke(this.inputData.drawColor);
+            this.p5js.line(0, 0, 0, -this.inputData.length);
+            this.p5js.translate(0, -this.inputData.length);
+          },
             "F": () => {
               // this.p5js.stroke(this.inputData.drawColor);
               this.p5js.line(0, 0, 0, -this.inputData.length);

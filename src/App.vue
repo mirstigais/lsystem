@@ -6,15 +6,14 @@
       mode="horizontal"
       @select="handleSelect"
     >
-      <el-menu-item index="1">{{ $t('menuVisualizer') }}</el-menu-item>
-      <el-menu-item index="2">{{ $t('menuAbout') }}</el-menu-item>
-      <el-menu-item index="3">{{ $t('menuCredits') }}</el-menu-item>
+      <el-menu-item index="1">{{ $t('menu.visualizer') }}</el-menu-item>
+      <el-menu-item index="2">{{ $t('menu.about') }}</el-menu-item>
+      <el-menu-item index="3">{{ $t('menu.credits') }}</el-menu-item>
     </el-menu>
     <div class="lang-wrapper">
-      <span class="lang-label">Language:</span>
+      <span class="lang-label">{{ $t('menu.language') }}</span>
       <el-select
         v-model="lang"
-        placeholder="Lang"
         style="width: 100px"
         @change="handleLanguageChange"
       >
@@ -41,24 +40,20 @@ import { useI18n } from "vue-i18n";
 import { langList } from '@plugins/locale';
 
 const activeIndex = ref('1');
-const lang = ref();
+const lang = ref('EN');
 const router = useRouter();
 const localeStore = useLocaleStore();
 const { locale } = useI18n({ useScope: 'global' });
 
 onMounted(() => {
   router.push({path: '/lsystem/visualizer'});
-})
+});
 
 const handleLanguageChange = () => {
-  console.log(lang.value);
   localeStore.setLocale(lang.value);
-  console.log(localeStore.locale);
-  // locale.value = localeStore.locale;
 }
 
   watch(() => localeStore.locale, () => {
-    console.log('locale changed');
     locale.value = localeStore.locale;
   });
 

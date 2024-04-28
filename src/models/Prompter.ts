@@ -21,6 +21,7 @@ export class Prompter {
     rules,
     example: X=F[-X][+X],
     allowed rules:
+      G = Move forward by line length,
       F = Move forward by line length,
       + = Turn left by turning angle,
       - = Turn right by turning angle,

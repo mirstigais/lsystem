@@ -1,96 +1,36 @@
 <template>
-    <div id="content">
-        <el-button type="info" @click='isShown = !isShown'>Show table of allowed characters</el-button>
-        <div v-show='isShown'>
-            <p>The following characters have a geometric interpretation.</p>
-            <a href="https://paulbourke.net/fractals/lsys/">Information Source</a>
-            <el-table
-                :data="tableData"
-                style="width: 100%"
-            >
-            <el-table-column prop="character" label="Character" width="180" />
-            <el-table-column prop="description" label="Description" width="180" />
-                <!-- <tr>
-                    <th>Character</th>
-                    <th>Meaning</th>
-                </tr>
-                <tr>
-                    <td>F</td>
-                    <td>Move forward by line length drawing a line</td>
-                </tr>
-                <tr>
-                    <td>f</td>
-                    <td>Move forward by line length drawing a line</td>
-                </tr>
-                <tr>
-                    <td>+</td>
-                    <td>Turn left by turning angle</td>
-                </tr>
-                <tr>
-                    <td>-</td>
-                    <td>Turn right by turning angle</td>
-                </tr>
-                <tr>
-                    <td>|</td>
-                    <td>Reverse direction (ie: turn by 180 degrees)</td>
-                </tr>
-                <tr>
-                    <td>[</td>
-                    <td>Push current drawing state onto stack</td>
-                </tr>
-                <tr>
-                    <td>]</td>
-                    <td> Pop current drawing state from the stack</td>
-                </tr>
-                <tr>
-                    <td>#</td>
-                    <td>Increment the line width by line width increment</td>
-                </tr>
-                <tr>
-                    <td>!</td>
-                    <td>Decrement the line width by line width increment</td>
-                </tr>
-                <tr>
-                    <td>@</td>
-                    <td>Draw a dot with line width radius</td>
-                </tr>
-                <tr>
-                    <td>{</td>
-                    <td>Open a polygon</td>
-                </tr>
-                <tr>
-                    <td>}</td>
-                    <td>Close a polygon and fill it with fill colour</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>Multiply the line length by the line length scale factor</td>
-                </tr>
-                <tr>
-                    <td>&lt</td>
-                    <td>Divide the line length by the line length scale factor</td>
-                </tr>
-                <tr>
-                    <td>&</td>
-                    <td>Swap the meaning of + and -</td>
-                </tr>
-                <tr>
-                    <td>(</td>
-                    <td>Decrement turning angle by turning angle increment</td>
-                </tr>
-                <tr>
-                    <td>)</td>
-                    <td>Increment turning angle by turning angle increment</td>
-                </tr> -->
-            </el-table>
-        </div>
+  <el-popover placement="bottom" :width="400" trigger="click">
+    <template #reference>
+      <el-button type="info" @click='isShown = !isShown' class="toc-button"> {{ $t('button.toc') }} </el-button>
+    </template>
+    <div v-show='isShown'>
+      <p>{{ $t('popover.toc.desc') }}</p>
+      <a href="https://paulbourke.net/fractals/lsys/">Information Source</a>
+      <el-table
+        :data="tableData"
+        style="width: 100%"
+      >
+        <el-table-column prop="character" label="Character" width="180" />
+        <el-table-column prop="description" label="Description" width="180" />
+      </el-table>
     </div>
+  </el-popover>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n({ useScope: 'global' });
 const isShown = ref(false);
+
+const forward = computed(() => t('popover.toc.table.forward'));
+const left = computed(() => t('popover.toc.table.left'));
+const right = computed(() => t('popover.toc.table.right'));
+const reverse = computed(() => t('popover.toc.table.reverse'));
+const push = computed(() => t('popover.toc.table.push'));
+const pop = computed(() => t('popover.toc.table.pop'));
+
 
 interface Record {
   character: string
@@ -99,28 +39,28 @@ interface Record {
 
 const tableData: Record[] = [
   {
-    character: 'F',
-    description: 'Move forward by line length drawing a line',
+    character: 'F, G',
+    description: forward.value,
   },
   {
     character: '+',
-    description: 'Turn left by turning angle',
+    description: left.value,
   },
   {
     character: '-',
-    description: 'Turn right by turning angle',
+    description: right.value,
   },
   {
     character: '|',
-    description: 'Reverse direction (ie: turn by 180 degrees)',
+    description: reverse.value,
   },
   {
     character: '[',
-    description: 'Push current drawing state onto stack',
+    description: push.value,
   },
   {
     character: ']',
-    description: 'Pop current drawing state from the stack',
+    description: pop.value,
   },
 ]
 </script>

@@ -1,14 +1,12 @@
 <template>
-    <h1>L-System visualizer</h1>
+  <h1>{{ $t('header.visualizer') }}</h1>
     <div class="main-content">
-        <InputForm />
-        <CanvasComponent/>
+      <InputForm />
+      <CanvasComponent/>
     </div>
-    <br>
-    <TableOfCharacters/>
+  <br>
 </template>
 <script setup lang="ts">
-  import TableOfCharacters from '../components/TableOfCharacters.vue'
-  import CanvasComponent from '../components/CanvasComponent.vue'
-  import InputForm from '../components/InputForm.vue'
+  import CanvasComponent from '@components/CanvasComponent.vue'
+  import InputForm from '@components/InputForm.vue'
 </script>

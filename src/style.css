@@ -60,6 +60,7 @@ body {
 .button-wrapper .el-form-item__content .el-form-item__content,
 .button-wrapper .el-form-item__content .el-button {
     width: 100%;
+    height: 50px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -69,4 +70,31 @@ body {
         width: 100%;
         max-width: 120px;
     }
+}
+
+@media only screen and (min-width: 768px) {
+  .number-wrapper .el-form-item,
+  .number-wrapper .el-form-item .el-form-item__content,
+  .number-wrapper .el-form-item .el-form-item__content .el-input-number,
+  .number-wrapper .el-form-item .el-form-item__content .el-input-number .el-input {
+      width: 100%;
+      max-width: 120px;
+  }
+}
+
+.number-wrapper .el-form-item,
+.number-wrapper .el-form-item .el-form-item__content,
+.number-wrapper .el-form-item .el-form-item__content .el-input-number,
+.number-wrapper .el-form-item .el-form-item__content .el-input-number .el-input {
+    width: 100%;
+}
+
+.color-wrapper .el-form-item {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.el-form-item .el-form-item__content .toc-button {
+  width: 100%;
+  height: 50px;
 }

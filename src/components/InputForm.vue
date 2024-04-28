@@ -8,69 +8,77 @@
     status-icon
   >
     <el-form-item>
-        <el-checkbox v-model="form.drawWithAI" label="Draw with AI" size="large" />
+      <el-checkbox v-model="form.drawWithAI" :label="$t('form.drawWithAI')" size="large" />
     </el-form-item>
-    <el-form-item v-if="form.drawWithAI" label="OpenAI API key" required>
-        <el-input v-model="form.apiKey" id="apiKey" type="password" />
+    <el-form-item v-if="form.drawWithAI" :label="$t('form.openAiApiKey')" required>
+      <el-input v-model="form.apiKey" id="apiKey" type="password" />
     </el-form-item>
-    <el-form-item v-if="form.drawWithAI" label="Prompt" required>
-        <el-input v-model="form.prompt" id="prompt" type="textarea" />
+    <el-form-item v-if="form.drawWithAI" :label="$t('form.prompt')" required>
+      <el-input v-model="form.prompt" id="prompt" type="textarea" />
     </el-form-item>
-    <el-form-item v-if="!form.drawWithAI" label="Iterations" required>
+    <div class="number-wrapper">
+      <el-form-item v-if="!form.drawWithAI" :label="$t('form.iterations')" required>
         <el-input-number v-model="form.iterations" id="iternationsInput" :min="1" controls-position="right" @change="handleChange" />
-    </el-form-item>
-    <el-form-item v-if="!form.drawWithAI" label="Angle" required>
+      </el-form-item>
+      <el-form-item v-if="!form.drawWithAI" :label="$t('form.angle')" required>
         <el-input-number v-model="form.angle" id="angleInput" :min="0" controls-position="right" @change="handleChange" />
-    </el-form-item>
-    <el-form-item v-if="!form.drawWithAI" label="Line length" required>
+      </el-form-item>
+      <el-form-item v-if="!form.drawWithAI" :label="$t('form.length')" required>
         <el-input-number v-model="form.length" id="lengthInput" :min="1" controls-position="right" @change="handleChange" />
+      </el-form-item>
+    </div>
+    <el-form-item v-if="!form.drawWithAI" :label="$t('form.start')" required>
+      <el-input v-model="form.start" id="startInput" placeholder="Start" />
     </el-form-item>
-    <el-form-item v-if="!form.drawWithAI" label="Start" required>
-        <el-input v-model="form.start" id="startInput" placeholder="Start" />
+    <el-form-item v-if="!form.drawWithAI" :label="$t('form.rules')" required>
+      <el-input v-model="form.drawRules" id="rulesInput" placeholder="Rules" type="textarea" />
     </el-form-item>
-    <el-form-item v-if="!form.drawWithAI" label="Rules" required>
-        <el-input v-model="form.drawRules" id="rulesInput" placeholder="Rules" type="textarea" />
+    <el-form-item>
+      <TableOfCharacters />
     </el-form-item>
-    <el-form-item label="Line color">
-        <el-color-picker v-model="form.drawColor" @change="handleDrawColorChange" />
-    </el-form-item>
-    <el-form-item label="Background color">
-        <el-color-picker v-model="form.backgroundColor" @change="handleBackgroundColorChange" />
-    </el-form-item>
+    <div class="color-wrapper">
+        <el-form-item :label="$t('form.drawColor')">
+          <el-color-picker v-model="form.drawColor" @change="handleDrawColorChange" />
+        </el-form-item>
+        <el-form-item :label="$t('form.backgroundColor')">
+          <el-color-picker v-model="form.backgroundColor" @change="handleBackgroundColorChange" />
+        </el-form-item>
+    </div>
     <el-form-item class="button-wrapper">
-        <el-form-item>
-          <el-button type="primary" @click="submitForm(inputFormRef)">Draw</el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button @click="resetForm(inputFormRef)">Reset</el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button @click="canvasStore.saveImage">Save Image</el-button>
-        </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm(inputFormRef)">{{ $t('button.draw') }}</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="resetForm(inputFormRef)">{{ $t('button.reset') }}</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="canvasStore.saveImage">{{ $t('button.save') }}</el-button>
+      </el-form-item>
     </el-form-item>
   </el-form>
 </template>
 
 <script setup lang="ts">
-    import { defineComponent, ref, reactive, onMounted } from 'vue';
-    import { useCanvasStore } from '@stores/canvas';
-    import { DrawInput } from '@services/DrawingService';
-    import DrawingServiceUtils from '@utils/DrawingServiceUtils';
-    import { FormInstance, FormRules } from 'element-plus';
-    import { Prompter } from '@models/Prompter';
+  import { defineComponent, ref, reactive, onMounted } from 'vue';
+  import { useCanvasStore } from '@stores/canvas';
+  import { DrawInput } from '@services/DrawingService';
+  import DrawingServiceUtils from '@utils/DrawingServiceUtils';
+  import { FormInstance, FormRules } from 'element-plus';
+  import { Prompter } from '@models/Prompter';
+  import TableOfCharacters from '@components/TableOfCharacters.vue'
 
-    interface InputForm {
-        iterations: number
-        angle: number
-        start: string
-        length: number
-        drawRules: string
-        drawColor: string
-        backgroundColor: string
-        drawWithAI: boolean,
-        apiKey: string,
-        prompt: string,
-    }
+  interface InputForm {
+    iterations: number
+    angle: number
+    start: string
+    length: number
+    drawRules: string
+    drawColor: string
+    backgroundColor: string
+    drawWithAI: boolean,
+    apiKey: string,
+    prompt: string,
+  }
 
     const inputFormRef = ref<FormInstance>();
 
@@ -144,6 +152,10 @@
         form.drawColor = '#000000';
         form.backgroundColor = '#FFFFFF';
     });
+
+    // watch(() => localeStore.locale, () => {
+    //   locale.value = localeStore.locale;
+    // });
 
     const canvasStore = useCanvasStore();
  
