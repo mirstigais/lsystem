@@ -6,6 +6,7 @@
     label-position="top"
     :rules="formRules"
     status-icon
+    class="lsystem-form"
   >
     <el-form-item>
       <el-checkbox v-model="form.drawWithAI" :label="$t('form.drawWithAI')" size="large" />

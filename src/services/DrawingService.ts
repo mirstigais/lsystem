@@ -54,8 +54,8 @@ export class DrawingService {
         this.cache = this.inputData.start;
         for (let i = 0; i < this.inputData.iterations; i++) {
             this.cache = this.generate();
-            this.draw();
         }
+        this.draw();
     }
 
     //needs a rewrite, I am a retard.

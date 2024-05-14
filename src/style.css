@@ -35,6 +35,7 @@ body {
 .main-content {
     display: flex;
     flex-direction: column;
+    column-gap: 20px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -45,13 +46,21 @@ body {
 
 /* Form content */
 
-.button-wrapper .el-form-item__content {
+.lsystem-form {
+    width: 100%;
+}
+
+.lsystem-form .button-wrapper .el-form-item__content {
     flex-direction: column;
     gap: 10px;
 }
   
 @media only screen and (min-width: 768px) {
-    .button-wrapper .el-form-item__content {
+    .lsystem-form {
+        width: 40%;
+    }
+
+    .lsystem-form .button-wrapper .el-form-item__content {
         flex-direction: row;
     }
 }

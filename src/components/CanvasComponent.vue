@@ -94,9 +94,4 @@
     padding-right: 10px;
     padding-left: 10px; 
 }
-
-.canvas {
-    width: 400px;
-    height: 400px;
-}
 </style>
