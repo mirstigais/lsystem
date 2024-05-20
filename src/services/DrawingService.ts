@@ -46,15 +46,17 @@ export class DrawingService {
         this.inputData = input;
         this.cache = '';
         this.p5js = p5js;
-        this.drawRules = this.setUpDrawRules();
+        this.drawRules = this.setupDrawRules();
     }
 
     start() {
         this.p5js.noLoop();
         this.cache = this.inputData.start;
+
         for (let i = 0; i < this.inputData.iterations; i++) {
             this.cache = this.generate();
         }
+
         this.draw();
     }
 
@@ -93,15 +95,13 @@ export class DrawingService {
         this.p5js.pop(); 
     }
 
-    setUpDrawRules(): DrawRules{
+    setupDrawRules(): DrawRules{
         return {
           "G": () => {
-            // this.p5js.stroke(this.inputData.drawColor);
             this.p5js.line(0, 0, 0, -this.inputData.length);
             this.p5js.translate(0, -this.inputData.length);
           },
             "F": () => {
-              // this.p5js.stroke(this.inputData.drawColor);
               this.p5js.line(0, 0, 0, -this.inputData.length);
               this.p5js.translate(0, -this.inputData.length);
             },

@@ -29,13 +29,12 @@ export class Prompter {
       [ = Push current state onto stack,
       ] = Pop state from stack`;
 
-    static axiomDescription = `axiom, example: X or XY`;
+  static axiomDescription = `axiom, example: X or XY`;
 
   static formInputSchema = z.object({
     iterations: z.number().describe("iterations"), 
     angle: z.number().describe('angle'),
     axiom: z.string().describe(Prompter.axiomDescription),
-    // rules: z.string().describe('rules, example: X=F[-X][+X]'),
     rules: z.string().describe(Prompter.rulesDescription),
     length: z.number().describe('line length, example: 10, suggested length 20'),
   });
@@ -56,7 +55,7 @@ export class Prompter {
       model: "gpt-3.5-turbo",
       response_model: { 
         schema: Prompter.formInputSchema, 
-        name: "User"
+        name: "L-System",
       }
     });
 
