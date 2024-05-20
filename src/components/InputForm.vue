@@ -9,7 +9,7 @@
     class="lsystem-form"
   >
     <el-form-item>
-      <el-checkbox v-model="form.drawWithAI" :label="$t('form.drawWithAI')" size="large" />
+        <el-checkbox v-model="form.drawWithAI" :label="$t('form.drawWithAI')" size="large" />
     </el-form-item>
     <el-form-item v-if="form.drawWithAI" :label="$t('form.openAiApiKey')" required>
       <el-input v-model="form.apiKey" id="apiKey" type="password" />
@@ -35,7 +35,7 @@
       <el-input v-model="form.drawRules" id="rulesInput" placeholder="Rules" type="textarea" />
     </el-form-item>
     <el-form-item>
-      <TableOfCharacters />
+      <TableOfCharacters :key="tocKey" />
     </el-form-item>
     <div class="color-wrapper">
         <el-form-item :label="$t('form.drawColor')">
@@ -60,13 +60,14 @@
 </template>
 
 <script setup lang="ts">
-  import { defineComponent, ref, reactive, onMounted } from 'vue';
-  import { useCanvasStore } from '@stores/canvas';
-  import { DrawInput } from '@services/DrawingService';
-  import DrawingServiceUtils from '@utils/DrawingServiceUtils';
-  import { FormInstance, FormRules } from 'element-plus';
-  import { Prompter } from '@models/Prompter';
-  import TableOfCharacters from '@components/TableOfCharacters.vue'
+import { defineComponent, ref, reactive, onMounted, watch } from 'vue';
+import { useCanvasStore } from '@stores/canvas';
+import { DrawInput } from '@services/DrawingService';
+import DrawingServiceUtils from '@utils/DrawingServiceUtils';
+import { FormInstance, FormRules } from 'element-plus';
+import { Prompter } from '@models/Prompter';
+import TableOfCharacters from '@components/TableOfCharacters.vue'
+import { useLocaleStore } from '@stores/locale';
 
   interface InputForm {
     iterations: number
@@ -81,7 +82,10 @@
     prompt: string,
   }
 
-    const inputFormRef = ref<FormInstance>();
+  const localeStore = useLocaleStore();
+  const infoAi = ref();
+  const tocKey = ref(0);
+  const inputFormRef = ref<FormInstance>();
 
     const form = reactive<InputForm>({
         iterations: 1,
@@ -154,9 +158,9 @@
         form.backgroundColor = '#FFFFFF';
     });
 
-    // watch(() => localeStore.locale, () => {
-    //   locale.value = localeStore.locale;
-    // });
+    watch(() => localeStore.locale, () => {
+      tocKey.value++;
+    });
 
     const canvasStore = useCanvasStore();
  

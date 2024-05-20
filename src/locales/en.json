@@ -25,5 +25,7 @@
     "popover.toc.table.reverse": "Reverse direction (ie: turn by 180 degrees)",
     "popover.toc.table.push": "Push current drawing state onto stack",
     "popover.toc.table.pop": "Pop current drawing state from the stack",
+    "popover.toc.table.col.character": "Character",
+    "popover.toc.table.col.description": "Description",
     "header.visualizer": "L-System visualizer"
 }

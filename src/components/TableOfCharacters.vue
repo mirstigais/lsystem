@@ -5,13 +5,12 @@
     </template>
     <div v-show='isShown'>
       <p>{{ $t('popover.toc.desc') }}</p>
-      <a href="https://paulbourke.net/fractals/lsys/">Information Source</a>
       <el-table
         :data="tableData"
         style="width: 100%"
       >
-        <el-table-column prop="character" label="Character" width="180" />
-        <el-table-column prop="description" label="Description" width="180" />
+        <el-table-column prop="character" :label="$t('popover.toc.table.col.character')" width="180" />
+        <el-table-column prop="description" :label="$t('popover.toc.table.col.description')" width="180" />
       </el-table>
     </div>
   </el-popover>
@@ -31,6 +30,9 @@ const reverse = computed(() => t('popover.toc.table.reverse'));
 const push = computed(() => t('popover.toc.table.push'));
 const pop = computed(() => t('popover.toc.table.pop'));
 
+defineProps<{
+  key?: number
+}>();
 
 interface Record {
   character: string

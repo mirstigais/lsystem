@@ -25,5 +25,7 @@
     "popover.toc.table.reverse": "Mainīt virzienu (jeb: pagriezties pa 180 grādiem)",
     "popover.toc.table.push": "Ievietot pašreizējo zīmēšanas stāvokli stekā",
     "popover.toc.table.pop": "Izņemt pašreizējo zīmēšanas stāvokli no steka",
+    "popover.toc.table.col.character": "Simbols",
+    "popover.toc.table.col.description": "Apraksts",
     "header.visualizer": "L-Sistēmu vizualizētājs"
 }
