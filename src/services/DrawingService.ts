@@ -28,11 +28,11 @@ export class DrawInput {
     }
 }
 
-export interface RulesAssociativeArr {
+export type RulesAssociativeArr = {
     [key: string]: string;
 }
 
-interface DrawRules {
+type DrawRules = {
     [key: string]: () => void;
 }
 
@@ -65,7 +65,7 @@ export class DrawingService {
         let next = '';
 
         for (let i = 0; i < this.cache.length; i++) {
-            let char = this.cache[i];
+            const char = this.cache[i];
             
             if (char in this.inputData.rules) {
                 next += this.inputData.rules[char];
@@ -85,7 +85,7 @@ export class DrawingService {
         // this.p5js.rotate(this.p5js.PI/180 * this.inputData.angle);
         
         for(let i = 0; i < this.cache.length; i ++) {
-          let char = this.cache[i];
+          const char = this.cache[i];
           
           if(char in this.drawRules) {
             this.drawRules[char]();

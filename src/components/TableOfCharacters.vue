@@ -5,10 +5,7 @@
     </template>
     <div v-show='isShown'>
       <p>{{ $t('popover.toc.desc') }}</p>
-      <el-table
-        :data="tableData"
-        style="width: 100%"
-      >
+      <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="character" :label="$t('popover.toc.table.col.character')" width="180" />
         <el-table-column prop="description" :label="$t('popover.toc.table.col.description')" width="180" />
       </el-table>

@@ -3,35 +3,33 @@ import { RulesAssociativeArr } from "@services/DrawingService";
 const allowedChars = ['F','+','-','|','[',']'];
 
 const validateAllowedCharacters = (inputString: string) : boolean => {
-    [...inputString].forEach(element => {
-        if (!allowedChars.includes(element)) {
-            return false;
-        }
-    });
+  [...inputString].forEach(element => {
+      if (!allowedChars.includes(element)) {
+          return false;
+      }
+  });
 
-    return true;
+  return true;
 }
 
 const convertRulesToAssociativeArr = (rulesString: string) : RulesAssociativeArr => {
-    let lines = rulesString.split('\n');
-    let rulesArr : RulesAssociativeArr = {};
+  const lines = rulesString.split('\n');
+  const rulesArr : RulesAssociativeArr = {};
 
-    lines.forEach(function (line : string) {
-        let split = line.split('=');
-        let key = split[0];
-        let value = split[1];
-        rulesArr[key] = value;
-    });
+  lines.forEach(function (line : string) {
+    const split = line.split('=');
+    const key = split[0];
+    const value = split[1];
+    rulesArr[key] = value;
+  });
 
-    console.log('Rules arr ' +rulesArr);
-
-    return rulesArr;
+  return rulesArr;
 }
 
 const DrawingServiceUtils = {
-    allowedChars,
-    validateAllowedCharacters,
-    convertRulesToAssociativeArr
+  allowedChars,
+  validateAllowedCharacters,
+  convertRulesToAssociativeArr
 }
 
 export default DrawingServiceUtils;
