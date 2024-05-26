@@ -3,6 +3,7 @@
     "menu.about": "About L-systems",
     "menu.credits": "Credits",
     "menu.language": "Language",
+
     "form.drawWithAI": "Draw with AI",
     "form.openAiApiKey": "OpenAI API key",
     "form.prompt": "Prompt",
@@ -14,10 +15,14 @@
     "form.backgroundColor": "Background color",
     "form.rules": "Rules",
     "form.drawColor": "Line color",
+    "form.drawWithAI.popover": "Switch on to draw with AI.",
+    "form.openAiApiKey.popover": "Enter your OpenAI API key.",
+
     "button.draw": "Draw",
     "button.reset": "Reset",
     "button.save": "Save Image",
     "button.toc": "Table of allowed characters",
+
     "popover.toc.desc": "The following characters have a geometric interpretation.",
     "popover.toc.table.forward": "Move forward by line length drawing a line",
     "popover.toc.table.left": "Turn left by turning angle",
@@ -27,5 +32,35 @@
     "popover.toc.table.pop": "Pop current drawing state from the stack",
     "popover.toc.table.col.character": "Character",
     "popover.toc.table.col.description": "Description",
-    "header.visualizer": "L-System visualizer"
+
+    "header.visualizer": "L-System visualizer",
+    "header.about": "About L-systems",
+    "header.credits": "Credits",
+    "header.credits.citations": "Citations",
+    "header.credits.tools": "Tools used",
+
+    "about.content": "L-Systems or Lindenmayer system were developed by a hungarian biologist Aristid Lindenmayer in 1968, while working on modeling plant development. His work was inspired by the need of describing plant growth processes based on formal gramathics, which at the time were only used in computer systems and in learning languages. Lindenmayer noticed that iterative structures could be used to model plant biological development.",
+    "about.content2": "Sistēmas darbības princips nozīmē aizvietot sākuma stāvoklī esošos simbolus ar to, kas ir noteikts noteikumos, piemēram, ja sākuma stāvoklis ir F un notiekums ir F = FF, tad katrā izpildes ciklā simbols F tiks aizvietots ar FF. Pēc noteikumu izpildes veidojas simbolu virne, kura reprezentē zīmēšanas darbības.",
+    "about.content3": "Sistēmu vizualizācijai parasti izmanto “Turtle graphics” zīmēšanas metodi, kurā, pārvietojoties no vienas koordinātes uz citu, tiek uzzīmēta līnija. Šai zīmēšanas metodei ir divi stāvokļi – pārvietoties zīmējot un pārvietoties.",
+    
+    "credits.content": "This section contains information about literature, tutorials and tools used in the development of this app.",
+    "credits.content2": "Tutorial that was used in development of this app. It describes what is L-Systems and goes over, step by step on how to code a visualizer for L-systems using Javascript.",
+    "credits.content3": "Video that goes in depth what are L-Systems, where they are used and how they work.",
+    "credits.content4": "Tools used",
+    "credits.content5": "Izmantotie rīki",
+    
+    "credits.citations1": "L-System drawing animation",
+
+    "credits.table.tools": "Tool",
+    "credits.table.usage": "Usage",
+    "credits.table.usage.vite": "Used as a base framework for development, it supplies a template and a development server for development.",
+    "credits.table.usage.vue": "JS framework that allows to create components, thus reducing the duplicated code amount.",
+    "credits.table.usage.ts": "A JS based language that allows for static data types",
+    "credits.table.usage.element-plus": "Ready made components for Vue 3.",
+    "credits.table.usage.github-actions": "Allow for automated deployments of this app whenever changes in code are made.",
+    "credits.table.usage.github-pages": "Used to publish this tool.",
+    "credits.table.usage.github": "Code repository",
+    "credits.table.usage.vue-router": "Used to add routing to the app",
+    "credits.table.usage.pinia": "Used to share data between components",
+    "credits.table.usage.instructorjs": "Simplifies communication between the app and LLM models"
 }
