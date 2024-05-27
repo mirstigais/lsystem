@@ -23,7 +23,7 @@
     "form.angle.popover": "Līniju leņķis, zīmējot vizualizāciju, līnijas tiks izmantota šī vērtība",
     "form.length.popover": "Līniju garums pikseļos",
     "form.start.popover": "Sākuma stāvoklis jeb aksioms, veicot noteikumu izpildi šī tiks izmantota kā sākuma vertība",
-    "form.rules.popover": "Ievadiet noteikumus, piemēram, 'X=F[-X][+X]' tie tiks izpildīti atkāroti, balstoties uz norādīto ciklu skaitu",
+    "form.rules.popover": "Piemēram, 'X=F[-X][+X]' tas tiks izpildīts atkāroti, balstoties uz norādīto ciklu skaitu",
 
     "button.draw": "Zīmēt",
     "button.reset": "Atiestatīt",
@@ -50,7 +50,7 @@
     "about.content2": "Sistēmas darbības princips nozīmē aizvietot sākuma stāvoklī esošos simbolus ar to, kas ir noteikts noteikumos, piemēram, ja sākuma stāvoklis ir F un notiekums ir F = FF, tad katrā izpildes ciklā simbols F tiks aizvietots ar FF. Pēc noteikumu izpildes veidojas simbolu virne, kura reprezentē zīmēšanas darbības.",
     "about.content3": "Sistēmu vizualizācijai parasti izmanto “Turtle graphics” zīmēšanas metodi, kurā, pārvietojoties no vienas koordinātes uz citu, tiek uzzīmēta līnija. Šai zīmēšanas metodei ir divi stāvokļi – pārvietoties zīmējot un pārvietoties.",
 
-    "credits.content": "Šī sadaļa satur informāciju par pamācībām, literatūru un rīkiem kas tika aplūkoti šī rīka izstrādes laikā",
+    "credits.content": "Šī sadaļa satur informāciju par pamācībām, literatūru un rīkiem, kas tika aplūkoti šī rīka izstrādes laikā",
     "credits.content2": "Pamācība, kuras kods ir izmantots šī rika izveidē. Tajā tiek izskaidrots kas ir L-sistēmas un soli pa solim sarakstīts kods lai vizualizētu L-sistēmas izmantojot Javascript valodu",
     "credits.content3": "Video, kas paskaidro par L-Sistēmām un to pielietojumu.",
     "credits.content4": "Saite uz lietotnes pirmkodu",

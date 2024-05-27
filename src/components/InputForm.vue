@@ -136,7 +136,6 @@ import { FormInstance, FormRules } from 'element-plus';
 import { Prompter } from '@models/Prompter';
 import TableOfCharacters from '@components/TableOfCharacters.vue'
 import { useLocaleStore } from '@stores/locale';
-import { langList } from '@plugins/locale';
 
 interface InputForm {
   iterations: number
@@ -152,7 +151,6 @@ interface InputForm {
 }
 
 const localeStore = useLocaleStore();
-const infoAi = ref();
 const tocKey = ref(0);
 const inputFormRef = ref<FormInstance>();
 
