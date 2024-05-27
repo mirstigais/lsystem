@@ -23,7 +23,7 @@
     "form.angle.popover": "Angle of lines, when drawing lines, this angle will be used",
     "form.length.popover": "Line length in pixels",
     "form.start.popover": "Starting state / axiom, when drawing, this will be used as the starting value",
-    "form.rules.popover": "Ievadiet noteikumus, piemēram, 'X=F[-X][+X]' tie tiks izpildīti atkāroti, balstoties uz norādīto ciklu skaitu",
+    "form.rules.popover": "For example,'X=F[-X][+X]' they will be executed repeatedly, based on iteration count",
 
     "button.draw": "Draw",
     "button.reset": "Reset",
@@ -53,7 +53,7 @@
     "credits.content": "This section contains information about literature, tutorials and tools used in the development of this app.",
     "credits.content2": "Tutorial that was used in development of this app. It describes what is L-Systems and goes over, step by step on how to code a visualizer for L-systems using Javascript.",
     "credits.content3": "Video that goes in depth what are L-Systems, where they are used and how they work.",
-    "credits.content4": "Tools used",
+    "credits.content4": "Link to source code",
     
     "credits.citations1": "L-System drawing animation",
 
