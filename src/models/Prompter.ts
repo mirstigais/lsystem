@@ -62,7 +62,7 @@ export class Prompter {
     console.log('response');
     console.log(response);
 
-    let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(response.rules);
+    const rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(response.rules);
 
     const submitData = new DrawInput(
       response.iterations,

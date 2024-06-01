@@ -1,27 +1,25 @@
 <template>
   <div class="grid-container">
-    <div ref="canvasContainer" class="canvas" style="border:1px solid #000000;"></div>
-    <!-- <div class="canvas-controls">
-            <span>Drawing color</span>
-            <el-color-picker v-model="drawColor" />
-            <span>background color</span>
-            <el-color-picker v-model="backgroundColor" />
-            <el-button plain>Download</el-button>
-        </div> -->
+    <div id="canvas" ref="canvasContainer" class="canvas" style="border:1px solid #000000;"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import p5 from 'p5';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useCanvasStore } from '@stores/canvas'
 import { storeToRefs } from 'pinia'
 import { DrawingService, DrawInput, RulesAssociativeArr } from '@services/DrawingService';
+import { ElLoading } from 'element-plus';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n({ useScope: 'global' });
 
 var p5jsCanvas: p5;
 var drawService: DrawingService;
 const canvasStore = useCanvasStore();
 const canvasContainer = ref(null);
+const loaderText = computed(() => t('loader.text'));
 const sizeX: number = 400;
 const sizeY: number = 400;
 const {
@@ -35,10 +33,6 @@ const {
 } = storeToRefs(canvasStore);
 
 onMounted(() => {
-  // drawColor.value = '#000000';
-  // backgroundColor.value = '#5e5d5d';
-
-  // Create p5.js sketch
   p5jsCanvas = new p5((p) => {
     p.setup = () => {
       p.createCanvas(sizeX, sizeY).parent(canvasContainer.value);
@@ -51,10 +45,17 @@ onMounted(() => {
 });
 
 canvasStore.$subscribe((mutation, state) => {
+  const loader = ElLoading.service({
+    lock: true,
+    text: loaderText.value,
+    background: 'rgba(0, 0, 0, 0.7)',
+    target: '#canvas',
+  });
+
   console.log('a change happened');
   console.log(mutation, state);
 
-  let inputData = new DrawInput(
+  const inputData = new DrawInput(
     iterations.value,
     angle.value,
     start.value,
@@ -66,12 +67,14 @@ canvasStore.$subscribe((mutation, state) => {
 
   drawService.inputData = inputData;
   drawService.start();
+  loader.close();
 });
 
 canvasStore.$onAction(
   ({ name }) => {
     if (name === 'saveImage') {
-      p5jsCanvas.saveCanvas();
+      const filename = 'drawing_' + new Date().toJSON().slice(0, 10);
+      p5jsCanvas.saveCanvas(filename);
     }
   });
 </script>

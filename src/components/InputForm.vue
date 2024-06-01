@@ -275,7 +275,7 @@ const handleSubmit = () => {
 
     canvasStore.setInputData(submitData);
   } else {
-    let prompter = new Prompter(form.apiKey, form.prompt);
+    const prompter = new Prompter(form.apiKey, form.prompt);
     prompter.askAI();
   }
 };

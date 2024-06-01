@@ -4,6 +4,8 @@
     "menu.credits": "Informācijas avoti",
     "menu.language": "Valoda",
 
+    "loader.text": "Zīmē....",
+
     "form.drawWithAI": "Zīmēt ar mākslīgo intelektu",
     "form.openAiApiKey": "OpenAI API atslēga",
     "form.prompt": "Vaicājums",

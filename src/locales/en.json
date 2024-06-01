@@ -4,6 +4,8 @@
     "menu.credits": "Credits",
     "menu.language": "Language",
 
+    "loader.text": "Drawing....",
+
     "form.drawWithAI": "Draw with AI",
     "form.openAiApiKey": "OpenAI API key",
     "form.prompt": "Prompt",
