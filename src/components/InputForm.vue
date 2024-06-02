@@ -8,35 +8,28 @@
     status-icon
     class="lsystem-form"
   >
-    <el-form-item>
-      <template #default>
-        <el-checkbox
-          v-model="form.drawWithAI"
-          size="large"
-          :label="$t('form.drawWithAI')"
-        />
-        <el-popover
-          placement="bottom"
-          :width="200"
-          trigger="click"
-          :content="$t('form.drawWithAI.popover')"
-        >
-          <template #reference>
-            <el-icon>
-              <InfoFilled />
-            </el-icon>
-          </template>
-        </el-popover>
-      </template>
+    <el-form-item class="form-input">
+      <el-checkbox
+        v-model="form.drawWithAI"
+        size="large"
+        :label="$t('form.drawWithAI')"
+      />
+      <el-popover
+        placement="bottom"
+        :width="200"
+        trigger="click"
+        :content="$t('form.drawWithAI.popover')"
+      >
+        <template #reference>
+          <el-icon class="form-tooltip">
+            <InfoFilled />
+          </el-icon>
+        </template>
+      </el-popover>
     </el-form-item>
-    <el-form-item
-      class="form-input"
-      v-if="form.drawWithAI"
-      :label="$t('form.openAiApiKey')"
-      required
-    >
-      <template #default class="form-input-wrapper">
-        <el-input v-model="form.apiKey" id="apiKey" type="password" />
+    <el-form-item class="form-input" v-if="form.drawWithAI" required>
+      <template #label>
+        <div class="form-label">{{ $t("form.openAiApiKey") }}</div>
         <el-popover
           placement="bottom"
           :width="200"
@@ -44,20 +37,17 @@
           :content="$t('form.openAiApiKey.popover')"
         >
           <template #reference>
-            <el-icon>
+            <el-icon class="form-tooltip">
               <InfoFilled />
             </el-icon>
           </template>
         </el-popover>
       </template>
+      <el-input v-model="form.apiKey" id="apiKey" type="password" />
     </el-form-item>
-    <el-form-item
-      class="form-input"
-      v-if="form.drawWithAI"
-      :label="$t('form.prompt')"
-    >
-      <template #default class="form-input-wrapper">
-        <el-input v-model="form.prompt" id="prompt" type="textarea" />
+    <el-form-item class="form-input" v-if="form.drawWithAI">
+      <template #label>
+        <div class="form-label">{{ $t("form.prompt") }}</div>
         <el-popover
           placement="bottom"
           :width="200"
@@ -65,15 +55,16 @@
           :content="$t('form.prompt.popover')"
         >
           <template #reference>
-            <el-icon>
+            <el-icon class="form-tooltip">
               <InfoFilled />
             </el-icon>
           </template>
         </el-popover>
       </template>
+      <el-input v-model="form.prompt" id="prompt" type="textarea" />
     </el-form-item>
     <div class="number-wrapper">
-      <el-form-item class="form-input" v-if="!form.drawWithAI">
+      <el-form-item class="form-input" v-if="!form.drawWithAI" required>
         <template #label>
           <div class="form-label">{{ $t("form.iterations") }}</div>
           <el-popover
@@ -237,6 +228,7 @@ import {
   onMounted,
   watch,
   computed,
+  nextTick,
 } from "vue";
 import { useCanvasStore } from "@stores/canvas";
 import { DrawInput } from "@services/DrawingService";
@@ -331,7 +323,7 @@ const formRules = reactive<FormRules<InputForm>>({
   ],
 });
 
-onMounted(() => {
+onMounted(async () => {
   form.iterations = 4;
   form.angle = 30;
   form.start = "X";
@@ -356,6 +348,9 @@ formStore.$subscribe((mutation, state) => {
   form.drawRules = state.rules;
   form.drawColor = state.drawColor;
   form.backgroundColor = state.backgroundColor;
+
+  //a cheap fix so examples wouldn't trigger drawing with AI
+  form.drawWithAI = false;
 
   handleSubmit();
 });

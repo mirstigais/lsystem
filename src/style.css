@@ -69,6 +69,7 @@ body {
   align-items: center;
 }
 
+.form-input.el-form-item .form-tooltip,
 .form-input.el-form-item .el-form-item__label .form-tooltip {
   padding: 8px;
   margin-left: 4px;
@@ -104,7 +105,7 @@ body {
     .el-input-number
     .el-input {
     width: 100%;
-    max-width: 120px;
+    max-width: 150px;
   }
 }
 
@@ -172,3 +173,96 @@ body {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
 } */
+
+.canvas {
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+}
+
+/* Examples */
+
+.example-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: fit-content;
+  gap: 16px;
+}
+
+@media only screen and (max-width: 460px) {
+  .example-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.example-box-wrapper {
+  position: relative;
+  max-width: 125px;
+  max-height: 125px;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+.example-box-wrapper::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.example-box-wrapper:hover::after {
+  opacity: 70%;
+}
+
+@media only screen and (max-width: 768px) {
+  .example-box-wrapper {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .example-box-wrapper:hover::after {
+    content: none;
+  }
+}
+
+.example-box-wrapper:hover .example-name {
+  opacity: 100%;
+}
+
+.example-box-wrapper .example-image {
+  width: 125px;
+}
+
+@media only screen and (max-width: 768px) {
+  .example-box-wrapper .example-image {
+    margin-left: 8px;
+  }
+}
+
+.example-box-wrapper .example-name {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@media only screen and (max-width: 768px) {
+  .example-box-wrapper .example-name {
+    position: relative;
+    top: initial;
+    transform: none;
+    margin-right: 12px;
+    opacity: 100%;
+  }
+}

@@ -1,11 +1,13 @@
 <template>
-  <div
-    class="example-box-wrapper"
-    v-for="record in records"
-    v-on:click="handleClick(record)"
-  >
-    <image class="example-image" :src="record.image" />
-    <div class="example-name">{{ record.name }}</div>
+  <div class="example-container">
+    <div
+      class="example-box-wrapper"
+      v-for="record in records"
+      v-on:click="handleClick(record)"
+    >
+      <img class="example-image" :src="record.image" />
+      <div class="example-name">{{ record.name }}</div>
+    </div>
   </div>
 </template>
 

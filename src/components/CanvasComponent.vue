@@ -62,17 +62,14 @@ canvasStore.$subscribe((mutation, state) => {
     target: "#canvas",
   });
 
-  console.log("a change happened");
-  console.log(mutation, state);
-
   const inputData = new DrawInput(
-    iterations.value,
-    angle.value,
-    start.value,
-    rules.value,
-    length.value,
-    drawColor.value,
-    backgroundColor.value
+    state.iterations,
+    state.angle,
+    state.start,
+    state.rules,
+    state.length,
+    state.drawColor,
+    state.backgroundColor
   );
 
   drawService.inputData = inputData;
@@ -103,10 +100,5 @@ canvasStore.$onAction(({ name }) => {
   /* One column that takes up the full width */
   gap: 10px;
   /* Gap between grid items */
-}
-
-.canvas-controls > * {
-  padding-right: 10px;
-  padding-left: 10px;
 }
 </style>
