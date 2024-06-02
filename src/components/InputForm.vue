@@ -30,11 +30,13 @@
       </template>
     </el-form-item>
     <el-form-item
+      class="form-input"
       v-if="form.drawWithAI"
       :label="$t('form.openAiApiKey')"
       required
     >
-      <template #default>
+      <template #default class="form-input-wrapper">
+        <el-input v-model="form.apiKey" id="apiKey" type="password" />
         <el-popover
           placement="bottom"
           :width="200"
@@ -47,11 +49,15 @@
             </el-icon>
           </template>
         </el-popover>
-        <el-input v-model="form.apiKey" id="apiKey" type="password" />
       </template>
     </el-form-item>
-    <el-form-item v-if="form.drawWithAI" :label="$t('form.prompt')" required>
-      <template #default>
+    <el-form-item
+      class="form-input"
+      v-if="form.drawWithAI"
+      :label="$t('form.prompt')"
+    >
+      <template #default class="form-input-wrapper">
+        <el-input v-model="form.prompt" id="prompt" type="textarea" />
         <el-popover
           placement="bottom"
           :width="200"
@@ -64,16 +70,12 @@
             </el-icon>
           </template>
         </el-popover>
-        <el-input v-model="form.prompt" id="prompt" type="textarea" />
       </template>
     </el-form-item>
     <div class="number-wrapper">
-      <el-form-item
-        v-if="!form.drawWithAI"
-        :label="$t('form.iterations')"
-        required
-      >
-        <template #default>
+      <el-form-item class="form-input" v-if="!form.drawWithAI">
+        <template #label>
+          <div class="form-label">{{ $t("form.iterations") }}</div>
           <el-popover
             placement="bottom"
             :width="200"
@@ -81,22 +83,28 @@
             :content="$t('form.iterations.popover')"
           >
             <template #reference>
-              <el-icon>
+              <el-icon class="form-tooltip">
                 <InfoFilled />
               </el-icon>
             </template>
           </el-popover>
-          <el-input-number
-            v-model="form.iterations"
-            id="iternationsInput"
-            :min="1"
-            controls-position="right"
-            @change="handleChange"
-          />
         </template>
+        <el-input-number
+          v-model="form.iterations"
+          id="iternationsInput"
+          :min="1"
+          controls-position="right"
+          @change="handleChange"
+        />
       </el-form-item>
-      <el-form-item v-if="!form.drawWithAI" :label="$t('form.angle')" required>
-        <template #default>
+      <el-form-item
+        class="form-input"
+        v-if="!form.drawWithAI"
+        :label="$t('form.angle')"
+        required
+      >
+        <template #label>
+          <div class="form-label">{{ $t("form.angle") }}</div>
           <el-popover
             placement="bottom"
             :width="200"
@@ -104,22 +112,23 @@
             :content="$t('form.angle.popover')"
           >
             <template #reference>
-              <el-icon>
+              <el-icon class="form-tooltip">
                 <InfoFilled />
               </el-icon>
             </template>
           </el-popover>
-          <el-input-number
-            v-model="form.angle"
-            id="angleInput"
-            :min="0"
-            controls-position="right"
-            @change="handleChange"
-          />
         </template>
+        <el-input-number
+          v-model="form.angle"
+          id="angleInput"
+          :min="0"
+          controls-position="right"
+          @change="handleChange"
+        />
       </el-form-item>
-      <el-form-item v-if="!form.drawWithAI" :label="$t('form.length')" required>
-        <template #default>
+      <el-form-item class="form-input" v-if="!form.drawWithAI" required>
+        <template #label>
+          <div class="form-label">{{ $t("form.length") }}</div>
           <el-popover
             placement="bottom"
             :width="200"
@@ -127,23 +136,24 @@
             :content="$t('form.length.popover')"
           >
             <template #reference>
-              <el-icon>
+              <el-icon class="form-tooltip">
                 <InfoFilled />
               </el-icon>
             </template>
           </el-popover>
-          <el-input-number
-            v-model="form.length"
-            id="lengthInput"
-            :min="1"
-            controls-position="right"
-            @change="handleChange"
-          />
         </template>
+        <el-input-number
+          v-model="form.length"
+          id="lengthInput"
+          :min="1"
+          controls-position="right"
+          @change="handleChange"
+        />
       </el-form-item>
     </div>
-    <el-form-item v-if="!form.drawWithAI" :label="$t('form.start')" required>
-      <template #default>
+    <el-form-item class="form-input" v-if="!form.drawWithAI" required>
+      <template #label>
+        <div class="form-label">{{ $t("form.start") }}</div>
         <el-popover
           placement="bottom"
           :width="200"
@@ -151,16 +161,17 @@
           :content="$t('form.start.popover')"
         >
           <template #reference>
-            <el-icon>
+            <el-icon class="form-tooltip">
               <InfoFilled />
             </el-icon>
           </template>
         </el-popover>
-        <el-input v-model="form.start" id="startInput" placeholder="Start" />
       </template>
+      <el-input v-model="form.start" id="startInput" placeholder="Start" />
     </el-form-item>
-    <el-form-item v-if="!form.drawWithAI" :label="$t('form.rules')" required>
-      <template #default>
+    <el-form-item class="form-input" v-if="!form.drawWithAI" required>
+      <template #label>
+        <div class="form-label">{{ $t("form.rules") }}</div>
         <el-popover
           placement="bottom"
           :width="200"
@@ -168,18 +179,18 @@
           :content="$t('form.rules.popover')"
         >
           <template #reference>
-            <el-icon>
+            <el-icon class="form-tooltip">
               <InfoFilled />
             </el-icon>
           </template>
         </el-popover>
-        <el-input
-          v-model="form.drawRules"
-          id="rulesInput"
-          placeholder="Rules"
-          type="textarea"
-        />
       </template>
+      <el-input
+        v-model="form.drawRules"
+        id="rulesInput"
+        placeholder="Rules"
+        type="textarea"
+      />
     </el-form-item>
     <el-form-item>
       <TableOfCharacters :key="tocKey" />
