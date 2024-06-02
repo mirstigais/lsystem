@@ -1,12 +1,9 @@
 import Instructor from "@instructor-ai/instructor";
 import OpenAI from "openai";
 import { z } from "zod";
-import { useCanvasStore } from '@stores/canvas';
-import { DrawInput } from '@services/DrawingService';
-import DrawingServiceUtils from "@utils/DrawingServiceUtils";
+import { useCanvasStore } from "@stores/canvas";
 
 export class Prompter {
-
   apiKey: string;
   prompt: string;
 
@@ -32,48 +29,35 @@ export class Prompter {
   static axiomDescription = `axiom, example: X or XY`;
 
   static formInputSchema = z.object({
-    iterations: z.number().describe("iterations"), 
-    angle: z.number().describe('angle'),
+    iterations: z.number().describe("iterations"),
+    angle: z.number().describe("angle"),
     axiom: z.string().describe(Prompter.axiomDescription),
     rules: z.string().describe(Prompter.rulesDescription),
-    length: z.number().describe('line length, example: 10, suggested length 20'),
+    length: z
+      .number()
+      .describe("line length, example: 10, suggested length 20"),
   });
 
   async askAI() {
     const oai = new OpenAI({
       apiKey: this.apiKey ?? undefined,
-      dangerouslyAllowBrowser: true
+      dangerouslyAllowBrowser: true,
     });
-    
+
     const client = Instructor({
       client: oai,
-      mode: "FUNCTIONS"
+      mode: "FUNCTIONS",
     });
-  
+
     const response = await client.chat.completions.create({
       messages: [{ role: "user", content: this.prompt }],
       model: "gpt-3.5-turbo",
-      response_model: { 
-        schema: Prompter.formInputSchema, 
+      response_model: {
+        schema: Prompter.formInputSchema,
         name: "L-System",
-      }
+      },
     });
 
-    console.log('response');
-    console.log(response);
-
-    const rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(response.rules);
-
-    const submitData = new DrawInput(
-      response.iterations,
-      response.angle,
-      response.axiom,
-      rulesObj,
-      response.length,
-      '#000000',
-      '#FFFFFF',
-    );
-  
-    Prompter.canvasStore.setInputData(submitData);
+    return response;
   }
 }

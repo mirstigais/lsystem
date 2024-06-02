@@ -1,10 +1,26 @@
 <template>
-  <el-form ref="inputFormRef" :model="form" label-width="auto" label-position="top" :rules="formRules" status-icon
-    class="lsystem-form">
+  <el-form
+    ref="inputFormRef"
+    :model="form"
+    label-width="auto"
+    label-position="top"
+    :rules="formRules"
+    status-icon
+    class="lsystem-form"
+  >
     <el-form-item>
       <template #default>
-        <el-checkbox v-model="form.drawWithAI" size="large" :label="$t('form.drawWithAI')" />
-        <el-popover placement="bottom" :width="200" trigger="click" :content="$t('form.drawWithAI.popover')">
+        <el-checkbox
+          v-model="form.drawWithAI"
+          size="large"
+          :label="$t('form.drawWithAI')"
+        />
+        <el-popover
+          placement="bottom"
+          :width="200"
+          trigger="click"
+          :content="$t('form.drawWithAI.popover')"
+        >
           <template #reference>
             <el-icon>
               <InfoFilled />
@@ -13,9 +29,18 @@
         </el-popover>
       </template>
     </el-form-item>
-    <el-form-item v-if="form.drawWithAI" :label="$t('form.openAiApiKey')" required>
+    <el-form-item
+      v-if="form.drawWithAI"
+      :label="$t('form.openAiApiKey')"
+      required
+    >
       <template #default>
-        <el-popover placement="bottom" :width="200" trigger="click" :content="$t('form.openAiApiKey.popover')">
+        <el-popover
+          placement="bottom"
+          :width="200"
+          trigger="click"
+          :content="$t('form.openAiApiKey.popover')"
+        >
           <template #reference>
             <el-icon>
               <InfoFilled />
@@ -27,7 +52,12 @@
     </el-form-item>
     <el-form-item v-if="form.drawWithAI" :label="$t('form.prompt')" required>
       <template #default>
-        <el-popover placement="bottom" :width="200" trigger="click" :content="$t('form.prompt.popover')">
+        <el-popover
+          placement="bottom"
+          :width="200"
+          trigger="click"
+          :content="$t('form.prompt.popover')"
+        >
           <template #reference>
             <el-icon>
               <InfoFilled />
@@ -38,49 +68,88 @@
       </template>
     </el-form-item>
     <div class="number-wrapper">
-      <el-form-item v-if="!form.drawWithAI" :label="$t('form.iterations')" required>
+      <el-form-item
+        v-if="!form.drawWithAI"
+        :label="$t('form.iterations')"
+        required
+      >
         <template #default>
-          <el-popover placement="bottom" :width="200" trigger="click" :content="$t('form.iterations.popover')">
+          <el-popover
+            placement="bottom"
+            :width="200"
+            trigger="click"
+            :content="$t('form.iterations.popover')"
+          >
             <template #reference>
               <el-icon>
                 <InfoFilled />
               </el-icon>
             </template>
           </el-popover>
-          <el-input-number v-model="form.iterations" id="iternationsInput" :min="1" controls-position="right"
-            @change="handleChange" />
+          <el-input-number
+            v-model="form.iterations"
+            id="iternationsInput"
+            :min="1"
+            controls-position="right"
+            @change="handleChange"
+          />
         </template>
       </el-form-item>
       <el-form-item v-if="!form.drawWithAI" :label="$t('form.angle')" required>
         <template #default>
-          <el-popover placement="bottom" :width="200" trigger="click" :content="$t('form.angle.popover')">
+          <el-popover
+            placement="bottom"
+            :width="200"
+            trigger="click"
+            :content="$t('form.angle.popover')"
+          >
             <template #reference>
               <el-icon>
                 <InfoFilled />
               </el-icon>
             </template>
           </el-popover>
-          <el-input-number v-model="form.angle" id="angleInput" :min="0" controls-position="right"
-            @change="handleChange" />
+          <el-input-number
+            v-model="form.angle"
+            id="angleInput"
+            :min="0"
+            controls-position="right"
+            @change="handleChange"
+          />
         </template>
       </el-form-item>
       <el-form-item v-if="!form.drawWithAI" :label="$t('form.length')" required>
         <template #default>
-          <el-popover placement="bottom" :width="200" trigger="click" :content="$t('form.length.popover')">
+          <el-popover
+            placement="bottom"
+            :width="200"
+            trigger="click"
+            :content="$t('form.length.popover')"
+          >
             <template #reference>
               <el-icon>
                 <InfoFilled />
               </el-icon>
             </template>
           </el-popover>
-          <el-input-number v-model="form.length" id="lengthInput" :min="1" controls-position="right"
-            @change="handleChange" />
+          <el-input-number
+            v-model="form.length"
+            id="lengthInput"
+            :min="1"
+            controls-position="right"
+            @change="handleChange"
+          />
         </template>
       </el-form-item>
     </div>
     <el-form-item v-if="!form.drawWithAI" :label="$t('form.start')" required>
       <template #default>
-        <el-popover placement="bottom" :width="200" trigger="click" :content="$t('form.start.popover')">
+        <el-popover
+          placement="bottom"
+          :width="200"
+          trigger="click"
+          :content="$t('form.start.popover')"
+        >
           <template #reference>
             <el-icon>
               <InfoFilled />
@@ -92,14 +161,24 @@
     </el-form-item>
     <el-form-item v-if="!form.drawWithAI" :label="$t('form.rules')" required>
       <template #default>
-        <el-popover placement="bottom" :width="200" trigger="click" :content="$t('form.rules.popover')">
+        <el-popover
+          placement="bottom"
+          :width="200"
+          trigger="click"
+          :content="$t('form.rules.popover')"
+        >
           <template #reference>
             <el-icon>
               <InfoFilled />
             </el-icon>
           </template>
         </el-popover>
-        <el-input v-model="form.drawRules" id="rulesInput" placeholder="Rules" type="textarea" />
+        <el-input
+          v-model="form.drawRules"
+          id="rulesInput"
+          placeholder="Rules"
+          type="textarea"
+        />
       </template>
     </el-form-item>
     <el-form-item>
@@ -107,110 +186,136 @@
     </el-form-item>
     <div class="color-wrapper">
       <el-form-item :label="$t('form.drawColor')">
-        <el-color-picker v-model="form.drawColor" @change="handleDrawColorChange" />
+        <el-color-picker
+          v-model="form.drawColor"
+          @change="handleDrawColorChange"
+        />
       </el-form-item>
       <el-form-item :label="$t('form.backgroundColor')">
-        <el-color-picker v-model="form.backgroundColor" @change="handleBackgroundColorChange" />
+        <el-color-picker
+          v-model="form.backgroundColor"
+          @change="handleBackgroundColorChange"
+        />
       </el-form-item>
     </div>
     <el-form-item class="button-wrapper">
       <el-form-item>
-        <el-button type="primary" @click="submitForm(inputFormRef)">{{ $t('button.draw') }}</el-button>
+        <el-button type="primary" @click="submitForm(inputFormRef)">{{
+          $t("button.draw")
+        }}</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button @click="resetForm(inputFormRef)">{{ $t('button.reset') }}</el-button>
+        <el-button @click="resetForm(inputFormRef)">{{
+          $t("button.reset")
+        }}</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button @click="canvasStore.saveImage">{{ $t('button.save') }}</el-button>
+        <el-button @click="canvasStore.saveImage">{{
+          $t("button.save")
+        }}</el-button>
       </el-form-item>
     </el-form-item>
   </el-form>
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref, reactive, onMounted, watch } from 'vue';
-import { useCanvasStore } from '@stores/canvas';
-import { DrawInput } from '@services/DrawingService';
-import DrawingServiceUtils from '@utils/DrawingServiceUtils';
-import { FormInstance, FormRules } from 'element-plus';
-import { Prompter } from '@models/Prompter';
-import TableOfCharacters from '@components/TableOfCharacters.vue'
-import { useLocaleStore } from '@stores/locale';
+import {
+  defineComponent,
+  ref,
+  reactive,
+  onMounted,
+  watch,
+  computed,
+} from "vue";
+import { useCanvasStore } from "@stores/canvas";
+import { DrawInput } from "@services/DrawingService";
+import DrawingServiceUtils from "@utils/DrawingServiceUtils";
+import { ElLoading, FormInstance, FormRules, ElMessage } from "element-plus";
+import { Prompter } from "@models/Prompter";
+import TableOfCharacters from "@components/TableOfCharacters.vue";
+import { useLocaleStore } from "@stores/locale";
+import { useFormStore } from "@stores/form";
+import { useI18n } from "vue-i18n";
 
 interface InputForm {
-  iterations: number
-  angle: number
-  start: string
-  length: number
-  drawRules: string
-  drawColor: string
-  backgroundColor: string
-  drawWithAI: boolean,
-  apiKey: string,
-  prompt: string,
+  iterations: number;
+  angle: number;
+  start: string;
+  length: number;
+  drawRules: string;
+  drawColor: string;
+  backgroundColor: string;
+  drawWithAI: boolean;
+  apiKey: string;
+  prompt: string;
 }
 
+const canvasStore = useCanvasStore();
+const formStore = useFormStore();
 const localeStore = useLocaleStore();
+const { t } = useI18n({ useScope: "global" });
+const loaderText = computed(() => t("loader.prompting"));
+const messageAIErrror = computed(() => t("message.AI.error"));
 const tocKey = ref(0);
 const inputFormRef = ref<FormInstance>();
 
 const form = reactive<InputForm>({
   iterations: 1,
   angle: 1,
-  start: '',
+  start: "",
   length: 1,
-  drawRules: '',
-  drawColor: '',
-  backgroundColor: '',
+  drawRules: "",
+  drawColor: "",
+  backgroundColor: "",
   drawWithAI: false,
-  apiKey: '',
-  prompt: '',
+  apiKey: "",
+  prompt: "",
 });
 
 const formRules = reactive<FormRules<InputForm>>({
   iterations: [
     {
       required: true,
-      message: 'Please enter iteration count',
-      trigger: 'change',
+      message: "Please enter iteration count",
+      trigger: "change",
     },
   ],
   angle: [
     {
       required: true,
-      message: 'Please enter angle',
-      trigger: 'change'
+      message: "Please enter angle",
+      trigger: "change",
     },
     {
       min: 0,
-      message: 'Angle cannot be less than 0',
-      trigger: 'blur'
+      message: "Angle cannot be less than 0",
+      trigger: "blur",
     },
   ],
   start: [
     {
       required: true,
-      message: 'Please enter start (axiom)',
-      trigger: 'blur'
+      message: "Please enter start (axiom)",
+      trigger: "blur",
     },
   ],
   length: [
     {
       required: true,
-      message: 'Please enter length',
-      trigger: 'change'
+      message: "Please enter length",
+      trigger: "change",
     },
     {
       min: 0,
-      message: 'Length cannot be less than 0',
-      trigger: 'blur'
+      message: "Length cannot be less than 0",
+      trigger: "blur",
     },
   ],
   drawRules: [
     {
       required: true,
-      message: 'Please enter rules',
-      trigger: 'blur'
+      message: "Please enter rules",
+      trigger: "blur",
     },
   ],
 });
@@ -218,21 +323,34 @@ const formRules = reactive<FormRules<InputForm>>({
 onMounted(() => {
   form.iterations = 4;
   form.angle = 30;
-  form.start = 'X';
+  form.start = "X";
   form.length = 36;
-  form.drawRules = 'X=F[-X][+X]';
-  form.drawColor = '#000000';
-  form.backgroundColor = '#FFFFFF';
+  form.drawRules = "X=F[-X][+X]";
+  form.drawColor = "#000000";
+  form.backgroundColor = "#FFFFFF";
 });
 
-watch(() => localeStore.locale, () => {
-  tocKey.value++;
-});
+watch(
+  () => localeStore.locale,
+  () => {
+    tocKey.value++;
+  }
+);
 
-const canvasStore = useCanvasStore();
+formStore.$subscribe((mutation, state) => {
+  form.iterations = state.iterations;
+  form.angle = state.angle;
+  form.start = state.start;
+  form.length = state.length;
+  form.drawRules = state.rules;
+  form.drawColor = state.drawColor;
+  form.backgroundColor = state.backgroundColor;
+
+  handleSubmit();
+});
 
 const handleChange = (value: number) => {
-  console.log(value)
+  console.log(value);
 };
 
 const handleBackgroundColorChange = (value: string) => {
@@ -244,40 +362,66 @@ const handleDrawColorChange = (value: string) => {
 };
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
+  if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
       handleSubmit();
     } else {
-      console.log('error submit!', fields)
+      console.log("error submit!", fields);
     }
-  })
+  });
 };
 
 const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  console.log('here');
-  formEl.resetFields()
-}
+  if (!formEl) return;
+  console.log("here");
+  formEl.resetFields();
+};
 
-const handleSubmit = () => {
-  if (!form.drawWithAI) {
-    let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(form.drawRules);
-    const submitData = new DrawInput(
-      form.iterations,
-      form.angle,
-      form.start,
-      rulesObj,
-      form.length,
-      form.drawColor,
-      form.backgroundColor,
-    )
+const handleSubmit = async () => {
+  if (form.drawWithAI) {
+    const loader = ElLoading.service({
+      lock: true,
+      text: loaderText.value,
+      background: "rgba(0, 0, 0, 0.7)",
+      target: "#canvas",
+    });
 
-    canvasStore.setInputData(submitData);
-  } else {
     const prompter = new Prompter(form.apiKey, form.prompt);
-    prompter.askAI();
+
+    try {
+      const data = await prompter.askAI();
+
+      form.iterations = data.iterations;
+      form.angle = data.angle;
+      form.start = data.axiom;
+      form.length = data.length;
+      form.drawRules = data.rules;
+    } catch (error: unknown) {
+      ElMessage.error(messageAIErrror.value);
+      loader.close();
+
+      return;
+    }
+
+    loader.close();
   }
+
+  let rulesObj = DrawingServiceUtils.convertRulesToAssociativeArr(
+    form.drawRules
+  );
+
+  const submitData = new DrawInput(
+    form.iterations,
+    form.angle,
+    form.start,
+    rulesObj,
+    form.length,
+    form.drawColor,
+    form.backgroundColor
+  );
+
+  canvasStore.setInputData(submitData);
 };
 
 // watch(form, (newValue) => {
