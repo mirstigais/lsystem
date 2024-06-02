@@ -25,7 +25,7 @@ interface example {
 const records: example[] = [
   {
     name: "Sierpinski triangle",
-    image: "/example-sierpenski-trinagle.png",
+    image: "example-sierpenski-trinagle.png",
     data: {
       iterations: 2,
       angle: 120,
@@ -38,7 +38,7 @@ const records: example[] = [
   },
   {
     name: "Koch curve",
-    image: "/example-koch-curve.png",
+    image: "example-koch-curve.png",
     data: {
       iterations: 3,
       angle: 90,
@@ -51,7 +51,7 @@ const records: example[] = [
   },
   {
     name: "Dragon curve",
-    image: "/example-dragon-curve.png",
+    image: "example-dragon-curve.png",
     data: {
       iterations: 10,
       angle: 90,
@@ -64,7 +64,7 @@ const records: example[] = [
   },
   {
     name: "Fractal plant",
-    image: "/example-fractal-plant.png",
+    image: "example-fractal-plant.png",
     data: {
       iterations: 5,
       angle: 25,
